@@ -13,6 +13,7 @@ export function ModeToggle() {
     return (
         <Button
             variant="outline"
+            className="border-2 bg-transparent"
             onClick={() => setTheme(theme === "light" ? "dark" : "light")}
         >
             {theme === "light" ? (
