@@ -29,9 +29,8 @@ const Login = () => {
     });
 
     const onSubmit = (values: z.infer<typeof loginSchema>) => {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
         console.log(values);
+        form.reset();
     };
 
     return (

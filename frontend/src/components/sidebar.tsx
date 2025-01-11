@@ -57,11 +57,12 @@ const SidebarLink = ({
     text: string;
     path: string;
 }) => {
+    const pathName = usePathname();
     return (
         <Link
             href={path ? path : "/"}
             className={`flex w-full gap-2 px-8 py-4 text-left text-sm font-semibold ${
-                path === usePathname() ? "bg-primary text-white" : ""
+                path === pathName ? "bg-primary text-white" : ""
             }`}
         >
             {icon}
