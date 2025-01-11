@@ -38,8 +38,13 @@ const Login = () => {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="w-full max-w-xl space-y-4 p-4"
+                className="w-full max-w-2xl space-y-4 p-4"
             >
+                <h1 className="text-2xl font-bold">Login</h1>
+                <p className="text-muted-foreground text-sm">
+                    Access ad free matching. Flexible and secure.
+                </p>
+
                 <FormField
                     control={form.control}
                     name="email"
@@ -48,13 +53,13 @@ const Login = () => {
                             <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input
-                                    placeholder="shadcn"
+                                    placeholder="harry@hogwarts.com"
                                     type="email"
                                     {...field}
                                 />
                             </FormControl>
                             <FormDescription>
-                                We &apos ll never share your email.
+                                We will never share your email.
                             </FormDescription>
                             <FormMessage />
                         </FormItem>
@@ -67,11 +72,7 @@ const Login = () => {
                         <FormItem>
                             <FormLabel>Password</FormLabel>
                             <FormControl>
-                                <Input
-                                    placeholder="shadcn"
-                                    type="password"
-                                    {...field}
-                                />
+                                <Input type="password" {...field} />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

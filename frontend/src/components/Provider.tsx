@@ -9,7 +9,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             setMounted(true);
-        }, 500);
+        }, 100);
         return () => clearTimeout(timer);
     }, []);
     // if (!mounted) return <Loading />;
