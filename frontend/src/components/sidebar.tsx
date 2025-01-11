@@ -1,18 +1,36 @@
-import { Bell } from "lucide-react";
+import {
+    Bell,
+    LayoutDashboard,
+    ClipboardMinus,
+    HeartPulse,
+    Settings,
+} from "lucide-react";
 
 const Sidebar = () => {
     return (
-        <div className="max-w-64 w-full bg-accent h-full p-6">
-            <h1>Organa</h1>
-            <div className="flex flex-col p-4">
-                <div>Dashboard</div>
-                <div>Organ</div>
-                <div>
+        <div className="bg-accent h-full w-full max-w-64 space-y-4 p-8">
+            <h1 className="text-primary text-2xl font-bold">Organa</h1>
+            <div className="flex flex-col gap-4">
+                <div className="flex gap-2">
+                    <LayoutDashboard></LayoutDashboard>
+                    Dashboard
+                </div>
+                <div className="flex gap-2">
+                    <HeartPulse></HeartPulse>
+                    Organ
+                </div>
+                <div className="flex gap-2">
                     <Bell></Bell>
                     Matches
                 </div>
-                <div>Patient</div>
-                <div>Settings</div>
+                <div className="flex gap-2">
+                    <ClipboardMinus></ClipboardMinus>
+                    Patient
+                </div>
+                <div className="flex gap-2">
+                    <Settings></Settings>
+                    Settings
+                </div>
             </div>
         </div>
     );
