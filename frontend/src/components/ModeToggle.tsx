@@ -11,8 +11,19 @@ export function ModeToggle() {
     console.log("Theme", theme);
 
     return (
-        <Button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-            {theme === "light" ? <Moon /> : <Sun />}
+        <Button
+            variant="outline"
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+        >
+            {theme === "light" ? (
+                <>
+                    <Moon /> Dark
+                </>
+            ) : (
+                <>
+                    <Sun /> Light
+                </>
+            )}
         </Button>
     );
 }
