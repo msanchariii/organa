@@ -2,11 +2,18 @@ import { Bell } from "lucide-react";
 
 const Sidebar = () => {
     return (
-        <div className="max-w-xs w-full bg-primary h-full p-6">
-            sidebar
-            <nav>
-                <Bell></Bell>
-            </nav>
+        <div className="max-w-64 w-full bg-accent h-full p-6">
+            <h1>Organa</h1>
+            <div className="flex flex-col p-4">
+                <div>Dashboard</div>
+                <div>Organ</div>
+                <div>
+                    <Bell></Bell>
+                    Matches
+                </div>
+                <div>Patient</div>
+                <div>Settings</div>
+            </div>
         </div>
     );
 };
