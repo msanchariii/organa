@@ -1,4 +1,11 @@
+import MatchCard from "@/components/match-card";
+
 const MatcherPage = () => {
-    return <div>MatcherPage</div>;
+    return (
+        <div className="space-y-4">
+            <MatchCard></MatchCard>
+            <MatchCard></MatchCard>
+        </div>
+    );
 };
 export default MatcherPage;
