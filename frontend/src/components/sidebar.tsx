@@ -13,10 +13,10 @@ import { ModeToggle } from "./ModeToggle";
 
 const Sidebar = () => {
     return (
-        <div className="bg-accent flex h-full w-full max-w-64 flex-col justify-between p-8">
-            <div className="w-full space-y-4">
+        <div className="bg-sidebar-background flex h-full w-full max-w-64 flex-col justify-between p-8">
+            <div className="w-full space-y-8">
                 <H2 className="text-primary">Organa</H2>
-                <nav className="flex flex-col gap-4">
+                <nav className="flex flex-col gap-8">
                     {sidebarLinks.map(({ icon, text, path }) => (
                         <SidebarLink
                             key={text}
