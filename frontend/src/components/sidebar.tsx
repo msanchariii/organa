@@ -28,11 +28,7 @@ const Sidebar = () => {
                             path={path}
                             icon={React.createElement(icon, {
                                 size: 20,
-                                className: `${
-                                    path === pathname
-                                        ? "text-white"
-                                        : "text-primary"
-                                }`,
+                                className: `${pathname.startsWith(path) ? "text-white" : "text-primary"}`,
                             })}
                         ></SidebarLink>
                     ))}
@@ -62,7 +58,7 @@ const SidebarLink = ({
         <Link
             href={path ? path : "/"}
             className={`flex w-full gap-2 px-8 py-4 text-left text-sm font-semibold ${
-                path === pathName ? "bg-primary text-white" : ""
+                pathName.startsWith(path) ? "bg-primary text-white" : ""
             }`}
         >
             {icon}

@@ -184,7 +184,12 @@ const PatientForm = () => {
                             </FormControl>
                             <FormDescription>
                                 1 being the lowest and 10 being the highest.{" "}
-                                <strong>Current Value: {priorityStatus}</strong>
+                                <strong>
+                                    Current Value:{" "}
+                                    <span className="text-primary">
+                                        {priorityStatus}
+                                    </span>
+                                </strong>
                             </FormDescription>
                             <FormMessage />
                         </FormItem>
