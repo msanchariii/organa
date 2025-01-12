@@ -4,6 +4,7 @@ import { motion, type AnimationProps } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const animationProps = {
     initial: { "--x": "100%", scale: 0.8 },
@@ -34,6 +35,14 @@ const ShinyButton = ({
     children,
     className,
 }: ShinyButtonProps) => {
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted) return null;
+
     return (
         <Link href="/login">
             <motion.button

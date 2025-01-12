@@ -3,7 +3,6 @@ import { OrganDistribution } from "@/components/charts/OrganDistribution";
 import H2 from "@/components/typography/H2";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-// import OrganDistribution from "@/components/charts/OrganDistribution";
 
 const OrganPage = () => {
     return (

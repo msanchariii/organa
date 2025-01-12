@@ -7,7 +7,7 @@ const Hero = () => {
         <div className="mb-10 flex min-h-[80vh] flex-col items-center justify-center px-4 text-black sm:px-6 lg:px-8">
             <div className="mx-4 mb-20 transition-all duration-300 ease-in-out hover:shadow-md">
                 <Alert
-                    className="overflow-hidden font-mono hover:shadow-md"
+                    className="cursor-pointer overflow-hidden font-mono hover:bg-red-200/25 hover:shadow-md"
                     variant="destructive"
                 >
                     <Terminal className="h-4 w-4" />
@@ -29,7 +29,7 @@ const Hero = () => {
                 and help others to live a better life and make a better future
                 for their families.
             </p>
-            <ShinyButton className="w-48 font-bold shadow-md">
+            <ShinyButton className="my-2 w-48 font-bold shadow-md">
                 Log In <ArrowRight className="h-5 w-5" />
             </ShinyButton>
         </div>
