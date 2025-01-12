@@ -16,8 +16,9 @@ const MatchCard = () => {
     return (
         // @kankanmondal22
         // ! The outermost div is not needed. DO NOT INCLUDE ANY ELEMENT IF IT IS NOT NEEDED
+        // ! Add time of notification in the card i.e. "1 hours ago"
         <div>
-            <Card className="p-8">
+            <Card className="bg-card/50 p-8">
                 <div className="flex">
                     {/* 
                     //! Card component should not directly contain any other component other than CardHeader, CardContent, CardFooter (DO NOT USE div or Avatar directly inside Card)

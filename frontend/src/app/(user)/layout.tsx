@@ -8,7 +8,9 @@ export default function RootLayout({
     return (
         <div className="flex h-screen gap-4">
             <Sidebar></Sidebar>
-            <div className="bg-background flex-grow p-4">{children}</div>
+            <div className="bg-background flex-grow px-4 pb-12 pt-4">
+                {children}
+            </div>
         </div>
     );
 }
