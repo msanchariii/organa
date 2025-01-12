@@ -26,11 +26,12 @@ const animationProps = {
     },
 } as AnimationProps;
 interface ShinyButtonProps {
-    text: string;
+    children?: React.ReactNode;
     className?: string;
 }
 const ShinyButton = ({
-    text = "shiny-button",
+    // text = "shiny-button",
+    children,
     className,
 }: ShinyButtonProps) => {
     return (
@@ -43,13 +44,13 @@ const ShinyButton = ({
                 )}
             >
                 <span
-                    className="relative block h-full w-full text-sm uppercase tracking-wide text-[rgb(0,0,0,65%)] dark:font-light dark:text-[rgb(255,255,255,90%)]"
+                    className="relative flex h-full w-full justify-center gap-4 text-sm uppercase tracking-wide text-[rgb(0,0,0,65%)] dark:font-light dark:text-[rgb(255,255,255,90%)]"
                     style={{
                         maskImage:
                             "linear-gradient(-75deg,hsl(var(--primary)) calc(var(--x) + 20%),transparent 30%),hsl(var(--primary)) 100%))",
                     }}
                 >
-                    {text}
+                    {children}
                 </span>
                 <span
                     style={{

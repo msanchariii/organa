@@ -1,4 +1,4 @@
-import { Terminal } from "lucide-react";
+import { ArrowRight, Terminal } from "lucide-react";
 import ShinyButton from "./shiny-button";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
@@ -11,14 +11,12 @@ const Hero = () => {
                     variant="destructive"
                 >
                     <Terminal className="h-4 w-4" />
-                    <AlertTitle>Heads up!</AlertTitle>
+                    <AlertTitle className="font-semibold">Heads up!</AlertTitle>
                     <AlertDescription>
                         Your blood donation can save a life and help others
                     </AlertDescription>
                 </Alert>
             </div>
-
-            <ShinyButton text="Log In" className="font-bold shadow-md" />
 
             <h1 className="mb-4 mt-3 max-w-4xl text-center text-5xl font-bold sm:mb-5 md:text-6xl lg:text-6xl">
                 Save Life
@@ -31,6 +29,9 @@ const Hero = () => {
                 and help others to live a better life and make a better future
                 for their families.
             </p>
+            <ShinyButton className="w-48 font-bold shadow-md">
+                Log In <ArrowRight className="h-5 w-5" />
+            </ShinyButton>
         </div>
     );
 };
