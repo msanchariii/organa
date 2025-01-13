@@ -11,7 +11,7 @@ import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
     Dialog,
-    DialogClose,
+    // DialogClose,
     DialogContent,
     DialogDescription,
     // DialogFooter,
@@ -63,16 +63,14 @@ const MatchCard = () => {
                 {/*
                  */}
                 <p className="text-sm">
-                    <strong>Recipient Name:</strong>Kankan Mondal
+                    <strong>Recipient Name: </strong>Kankan Mondal
+                </p>
+
+                <p className="text-sm">
+                    <strong>Organ Type: </strong> Kidney
                 </p>
                 <p className="text-sm">
-                    <strong>Donor Name:</strong> Kankan Mondal
-                </p>
-                <p className="text-sm">
-                    <strong>Organ Type:</strong> Kidney
-                </p>
-                <p className="text-sm">
-                    <strong>Viable Time of Organ:</strong> 5 hours
+                    <strong>Viable Time of Organ: </strong> 5 hours
                 </p>
 
                 <p className="text-sm">
@@ -80,56 +78,57 @@ const MatchCard = () => {
                 </p>
             </CardContent>
 
-            <CardFooter className="space-x-4">
-                {/* 
-                            // * Use primary(default) button for approve and secondary button for dismiss
-                        */}
+            <CardFooter className="relative space-x-4">
+                <Button variant={"default"}>Approve</Button>
+                <Button variant={"secondary"}>Dismiss</Button>
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button variant={"outline"}>View Details</Button>
+                        <Button className="" variant={"outline"}>
+                            View Details
+                        </Button>
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
                             <DialogTitle>
-                                Patient Name:Kankan Mondal
+                                Patient Name: Kankan Mondal
                             </DialogTitle>
                             <DialogDescription>
                                 Kidney match Found for kankan
                             </DialogDescription>
                         </DialogHeader>
-                        <div className="flex w-[50vw] justify-between gap-4">
+                        <div className="flex w-[50vw] justify-between gap-4 text-sm">
                             <List>
                                 <li>
-                                    <strong>Name:</strong>
+                                    <strong>Name: </strong>
                                     Kankan Mondal
                                 </li>
                                 <li>
-                                    <strong>Age:</strong>
+                                    <strong>Age: </strong>
                                     67
                                 </li>
                                 <li>
-                                    <strong>Gender:</strong>
+                                    <strong>Gender: </strong>
                                     Female
                                 </li>
                                 <li>
-                                    <strong>Organ needed:</strong>
+                                    <strong>Organ needed: </strong>
                                     Brain
                                 </li>
                             </List>
                             <List>
                                 <li>
-                                    <strong>Priority Status:</strong>
+                                    <strong>Priority Status: </strong>
                                     100
                                 </li>
                                 <li>
-                                    <strong>Organ Viability:</strong>5 hours
+                                    <strong>Organ Viability: </strong>5 hours
                                 </li>
                                 <li>
-                                    <strong>Organ Size:</strong>
+                                    <strong>Organ Size: </strong>
                                     25 cm
                                 </li>
                                 <li>
-                                    <strong>Organ Condition:</strong>
+                                    <strong>Organ Condition: </strong>
                                     kharap
                                 </li>
                             </List>
@@ -139,7 +138,7 @@ const MatchCard = () => {
                                 {/* <TableCaption>Details</TableCaption> */}
                                 <TableHeader>
                                     <TableRow>
-                                        <TableHead className="w-[175px]"></TableHead>
+                                        <TableHead className="w-[300px]"></TableHead>
                                         <TableHead>Donor</TableHead>
                                         <TableHead>Recipient</TableHead>
                                     </TableRow>
@@ -187,8 +186,6 @@ const MatchCard = () => {
                         </DialogFooter> */}
                     </DialogContent>
                 </Dialog>
-                <Button variant={"default"}>Approve</Button>
-                <Button variant={"secondary"}>Dismiss</Button>
             </CardFooter>
         </Card>
     );
