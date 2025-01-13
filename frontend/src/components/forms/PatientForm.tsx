@@ -503,7 +503,8 @@ const PatientForm = () => {
                         </FormItem>
                     )}
                 />
-
+                
+                {/* HLA and PRScore */}
                 <div className="grid grid-cols-6 gap-4">
                     <FormField
                         control={form.control}
