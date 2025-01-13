@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {
     Label,
@@ -6,7 +6,7 @@ import {
     PolarRadiusAxis,
     RadialBar,
     RadialBarChart,
-} from "recharts"
+} from "recharts";
 
 import {
     Card,
@@ -14,11 +14,11 @@ import {
     CardDescription,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
-import { ChartConfig, ChartContainer } from "@/components/ui/chart"
+} from "@/components/ui/card";
+import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 const chartData = [
     { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-]
+];
 
 const chartConfig = {
     visitors: {
@@ -28,16 +28,16 @@ const chartConfig = {
         label: "Safari",
         color: "hsl(var(--chart-2))",
     },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 export function OperationSuccessRate() {
     return (
-        <Card className="flex flex-col bg-transparent h-full w-full">
-            <CardHeader className="items-center pb-0">
+        <Card className="border-primary flex h-full w-full flex-col bg-transparent">
+            <CardHeader className="items-center">
                 <CardTitle>Radial Chart - Text</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <CardDescription>Jan 2014 - Jul 2024</CardDescription>
             </CardHeader>
-            <CardContent className="flex-1 pb-0">
+            <CardContent className="flex-1">
                 <ChartContainer
                     config={chartConfig}
                     className="mx-auto aspect-square max-h-[250px]"
@@ -56,11 +56,23 @@ export function OperationSuccessRate() {
                             className="first:fill-muted last:fill-background"
                             polarRadius={[86, 74]}
                         />
-                        <RadialBar dataKey="visitors" background cornerRadius={10} />
-                        <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
+                        <RadialBar
+                            dataKey="visitors"
+                            background
+                            cornerRadius={10}
+                        />
+                        <PolarRadiusAxis
+                            tick={false}
+                            tickLine={false}
+                            axisLine={false}
+                        >
                             <Label
                                 content={({ viewBox }) => {
-                                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                                    if (
+                                        viewBox &&
+                                        "cx" in viewBox &&
+                                        "cy" in viewBox
+                                    ) {
                                         return (
                                             <text
                                                 x={viewBox.cx}
@@ -83,7 +95,7 @@ export function OperationSuccessRate() {
                                                     Visitors
                                                 </tspan>
                                             </text>
-                                        )
+                                        );
                                     }
                                 }}
                             />
@@ -91,7 +103,6 @@ export function OperationSuccessRate() {
                     </RadialBarChart>
                 </ChartContainer>
             </CardContent>
-
         </Card>
-    )
+    );
 }

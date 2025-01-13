@@ -1,18 +1,18 @@
 "use client";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
     Form,
     FormControl,
-    FormDescription,
+    // FormDescription,
     FormField,
     FormItem,
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { format } from "date-fns";
+// import { format } from "date-fns";
 
 import { Input } from "@/components/ui/input";
 import {
@@ -22,11 +22,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { Slider } from "../ui/slider";
 import { Textarea } from "../ui/textarea";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { CalendarIcon } from "lucide-react";
-import { Calendar } from "../ui/calendar";
 import H2 from "../typography/H2";
 
 const organSchema = z.object({
@@ -53,10 +49,7 @@ const organSchema = z.object({
 
     // Organ Condition
     organSize: z.string().optional(),
-    organConditionRating: z
-        .enum(["Excellent", "Good", "Fair", "Poor"])
-    ,
-
+    organConditionRating: z.enum(["Excellent", "Good", "Fair", "Poor"]),
     // HLA Typing
     hlaTest: z
         .object({
@@ -332,8 +325,6 @@ const OrganForm = () => {
                             </FormItem>
                         )}
                     />
-
-
                 </div>
                 {/* hla test */}
                 <div className="grid grid-cols-5 gap-4">
@@ -434,7 +425,6 @@ const OrganForm = () => {
     viralTestingStatus: z.enum(["Negative", "Positive", "Pending"]).optional(),
     organBiopsyResults: z.string().optional(), */}
 
-                    
                 <H2>Location Details</H2>
                 <div className="grid grid-cols-2 gap-4">
                     {/* donor hospital */}
@@ -445,7 +435,10 @@ const OrganForm = () => {
                             <FormItem>
                                 <FormLabel>Donor Hospital</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="St. Mary's Hospital" {...field} />
+                                    <Input
+                                        placeholder="St. Mary's Hospital"
+                                        {...field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -460,84 +453,86 @@ const OrganForm = () => {
                             <FormItem>
                                 <FormLabel>Current Location</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="St. Mary's Hospital" {...field} />
+                                    <Input
+                                        placeholder="St. Mary's Hospital"
+                                        {...field}
+                                    />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
                         )}
                     />
-
-                    
                 </div>
 
                 <H2>Additional Information</H2>
-                <div className="grid grid-cols-3 gap-4">
-                    {/* medical history */}
-                    <FormField
-                        control={form.control}
-                        name="medicalHistory"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Medical History</FormLabel>
-                                <FormControl>
-                                    <Textarea {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+                {/* <div className="grid grid-cols-3 gap-4"> */}
+                {/* medical history */}
+                <FormField
+                    control={form.control}
+                    name="medicalHistory"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Medical History</FormLabel>
+                            <FormControl>
+                                <Textarea {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
 
-                    {/* viral testing status */}
-                    <FormField
-                        control={form.control}
-                        name="viralTestingStatus"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Viral Testing Status</FormLabel>
-                                <Select
-                                    onValueChange={field.onChange}
-                                    defaultValue={field.value}
-                                >
-                                    <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Select Viral Testing Status" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        {organSchema.shape.viralTestingStatus.options.map(
-                                            (status) => {
-                                                return (
-                                                    <SelectItem
-                                                        key={status}
-                                                        value={status}
-                                                    >
-                                                        {status}
-                                                    </SelectItem>
-                                                );
-                                            },
-                                        )}
-                                    </SelectContent>
-                                </Select>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-
-                    {/* organ biopsy results */}
-                    <FormField
-                        control={form.control}
-                        name="organBiopsyResults"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Organ Biopsy Results</FormLabel>
+                {/* viral testing status */}
+                <FormField
+                    control={form.control}
+                    name="viralTestingStatus"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Viral Testing Status</FormLabel>
+                            <Select
+                                onValueChange={field.onChange}
+                                defaultValue={field.value}
+                            >
                                 <FormControl>
-                                    <Textarea {...field} />
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Select Viral Testing Status" />
+                                    </SelectTrigger>
                                 </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                </div>
+                                <SelectContent>
+                                    {organSchema.shape.viralTestingStatus.options.map(
+                                        (status) => {
+                                            return (
+                                                <SelectItem
+                                                    key={status}
+                                                    value={status}
+                                                >
+                                                    {status}
+                                                </SelectItem>
+                                            );
+                                        },
+                                    )}
+                                </SelectContent>
+                            </Select>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+
+                {/* organ biopsy results */}
+                <FormField
+                    control={form.control}
+                    name="organBiopsyResults"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Organ Biopsy Results</FormLabel>
+                            <FormControl>
+                                <Textarea {...field} />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                {/* </div> */}
+                <Button type="submit">Submit</Button>
             </form>
         </Form>
     );

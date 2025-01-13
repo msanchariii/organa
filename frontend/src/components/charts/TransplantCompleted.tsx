@@ -1,8 +1,8 @@
 // TransplantCompleted
-"use client"
+"use client";
 
-import { TrendingUp } from "lucide-react"
-import { CartesianGrid, Line, LineChart, XAxis } from "recharts"
+import { TrendingUp } from "lucide-react";
+import { CartesianGrid, Line, LineChart, XAxis } from "recharts";
 
 import {
     Card,
@@ -11,13 +11,13 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
     ChartConfig,
     ChartContainer,
     ChartTooltip,
     ChartTooltipContent,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 // const chartData = [
 //     { month: "January", desktop: 186, mobile: 80 },
 //     { month: "February", desktop: 305, mobile: 200 },
@@ -55,13 +55,13 @@ const chartConfig = {
 
 export function TransplantCompleted() {
     return (
-        <Card className="bg-transparent h-full w-full">
+        <Card className="border-primary h-full w-full bg-transparent">
             <CardHeader>
                 <CardTitle>Line Chart - Multiple</CardTitle>
                 <CardDescription>January - June 2024</CardDescription>
             </CardHeader>
             <CardContent>
-                <ChartContainer config={chartConfig}>
+                <ChartContainer config={chartConfig} className="h-96 w-full">
                     <LineChart
                         accessibilityLayer
                         data={chartData}
@@ -73,12 +73,15 @@ export function TransplantCompleted() {
                         <CartesianGrid vertical={false} />
                         <XAxis
                             dataKey="month"
-                            tickLine={false}
-                            axisLine={false}
+                            tickLine={true}
+                            axisLine={true}
                             tickMargin={8}
                             tickFormatter={(value) => value.slice(0, 3)}
                         />
-                        <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
+                        <ChartTooltip
+                            cursor={false}
+                            content={<ChartTooltipContent />}
+                        />
                         <Line
                             dataKey="kidney"
                             type="monotone"
@@ -107,11 +110,9 @@ export function TransplantCompleted() {
                             strokeWidth={2}
                             dot={false}
                         />
-
                     </LineChart>
                 </ChartContainer>
             </CardContent>
-
         </Card>
-    )
+    );
 }

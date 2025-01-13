@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import { TrendingUp } from "lucide-react"
-import { LabelList, RadialBar, RadialBarChart } from "recharts"
+import { TrendingUp } from "lucide-react";
+import { LabelList, RadialBar, RadialBarChart } from "recharts";
 
 import {
     Card,
@@ -10,14 +10,13 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
     ChartConfig,
     ChartContainer,
     ChartTooltip,
     ChartTooltipContent,
-} from "@/components/ui/chart"
-
+} from "@/components/ui/chart";
 
 const chartData = [
     { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
@@ -25,7 +24,7 @@ const chartData = [
     { browser: "firefox", visitors: 187, fill: "var(--color-firefox)" },
     { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
     { browser: "other", visitors: 90, fill: "var(--color-other)" },
-]
+];
 
 const chartConfig = {
     visitors: {
@@ -51,11 +50,11 @@ const chartConfig = {
         label: "Other",
         color: "hsl(var(--chart-5))",
     },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 export function HlaMatchSuccessRate() {
     return (
-        <Card className="flex flex-col bg-transparent h-full w-full">
+        <Card className="border-primary flex h-full w-full flex-col bg-transparent">
             <CardHeader className="items-center pb-0">
                 <CardTitle>Radial Chart - Label</CardTitle>
                 <CardDescription>January - June 2024</CardDescription>
@@ -74,7 +73,12 @@ export function HlaMatchSuccessRate() {
                     >
                         <ChartTooltip
                             cursor={false}
-                            content={<ChartTooltipContent hideLabel nameKey="browser" />}
+                            content={
+                                <ChartTooltipContent
+                                    hideLabel
+                                    nameKey="browser"
+                                />
+                            }
                         />
                         <RadialBar dataKey="visitors" background>
                             <LabelList
@@ -87,7 +91,6 @@ export function HlaMatchSuccessRate() {
                     </RadialBarChart>
                 </ChartContainer>
             </CardContent>
-           
         </Card>
-    )
+    );
 }

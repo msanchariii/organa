@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { TrendingUp } from "lucide-react"
-import { Label, Pie, PieChart } from "recharts"
+import * as React from "react";
+import { TrendingUp } from "lucide-react";
+import { Label, Pie, PieChart } from "recharts";
 
 import {
     Card,
@@ -11,22 +11,20 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
     ChartConfig,
     ChartContainer,
     ChartTooltip,
     ChartTooltipContent,
-} from "@/components/ui/chart"
+} from "@/components/ui/chart";
 const chartData = [
     { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
     { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
     { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
     { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
     { browser: "other", visitors: 190, fill: "var(--color-other)" },
-]
-
-
+];
 
 const chartConfig = {
     visitors: {
@@ -52,7 +50,7 @@ const chartConfig = {
         label: "Other",
         color: "hsl(var(--chart-5))",
     },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 // const chartConfig = {
 //     kidney: { label: "Kidney", color: "hsl(var(--chart-1))" },
@@ -61,7 +59,8 @@ const chartConfig = {
 //     lungs: { label: "Lungs", color: "hsl(var(--chart-4))" },
 // } satisfies ChartConfig;
 
-{/* <ChartContainer config={chartConfig}>
+{
+    /* <ChartContainer config={chartConfig}>
           <LineChart data={chartData} width={600} height={300} margin={{ left: 20, right: 20 }}>
             <CartesianGrid strokeDasharray="3 3" />
             <XAxis dataKey="month" />
@@ -73,15 +72,16 @@ const chartConfig = {
             <Line type="monotone" dataKey="heart" stroke="var(--color-heart)" strokeWidth={2} />
             <Line type="monotone" dataKey="lungs" stroke="var(--color-lungs)" strokeWidth={2} />
           </LineChart>
-        </ChartContainer> */}
+        </ChartContainer> */
+}
 
 export function PatientWaitingByOrganType() {
     const totalVisitors = React.useMemo(() => {
-        return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
-    }, [])
+        return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+    }, []);
 
     return (
-        <Card className="flex flex-col bg-transparent h-full w-full">
+        <Card className="border-primary flex h-full w-full flex-col bg-transparent">
             <CardHeader className="items-center pb-0">
                 <CardTitle>Pie Chart - Donut with Text</CardTitle>
                 <CardDescription>January - June 2024</CardDescription>
@@ -105,7 +105,11 @@ export function PatientWaitingByOrganType() {
                         >
                             <Label
                                 content={({ viewBox }) => {
-                                    if (viewBox && "cx" in viewBox && "cy" in viewBox) {
+                                    if (
+                                        viewBox &&
+                                        "cx" in viewBox &&
+                                        "cy" in viewBox
+                                    ) {
                                         return (
                                             <text
                                                 x={viewBox.cx}
@@ -128,7 +132,7 @@ export function PatientWaitingByOrganType() {
                                                     Visitors
                                                 </tspan>
                                             </text>
-                                        )
+                                        );
                                     }
                                 }}
                             />
@@ -136,7 +140,6 @@ export function PatientWaitingByOrganType() {
                     </PieChart>
                 </ChartContainer>
             </CardContent>
-           
         </Card>
-    )
+    );
 }
