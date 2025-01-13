@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { TrendingUp } from "lucide-react";
 import { Label, Pie, PieChart } from "recharts";
 
 import {
@@ -15,69 +14,58 @@ import {
 import {
     ChartConfig,
     ChartContainer,
+    ChartLegend,
+    ChartLegendContent,
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart";
+
 const chartData = [
-    { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-    { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
-    { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-    { browser: "other", visitors: 190, fill: "var(--color-other)" },
+    { organ: "Kidney", donors: 300, fill: "var(--color-kidney)" },
+    { organ: "Heart", donors: 120, fill: "var(--color-heart)" },
+    { organ: "Liver", donors: 200, fill: "var(--color-liver)" },
+    { organ: "Lungs", donors: 150, fill: "var(--color-lungs)" },
+    { organ: "Eyes", donors: 250, fill: "var(--color-eyes)" },
+    { organ: "Intestine", donors: 90, fill: "var(--color-intestine)" },
 ];
 
 const chartConfig = {
-    visitors: {
-        label: "Visitors",
+    donors: {
+        label: "Donors",
     },
-    chrome: {
-        label: "Chrome",
+    kidney: {
+        label: "Kidney",
         color: "hsl(var(--chart-1))",
     },
-    safari: {
-        label: "Safari",
+    heart: {
+        label: "Heart",
         color: "hsl(var(--chart-2))",
     },
-    firefox: {
-        label: "Firefox",
+    liver: {
+        label: "Liver",
         color: "hsl(var(--chart-3))",
     },
-    edge: {
-        label: "Edge",
+    lungs: {
+        label: "Lungs",
         color: "hsl(var(--chart-4))",
     },
-    other: {
-        label: "Other",
+    eyes: {
+        label: "Eyes",
         color: "hsl(var(--chart-5))",
+    },
+    intestine: {
+        label: "Intestine",
+        color: "hsl(var(--chart-6))",
     },
 } satisfies ChartConfig;
 
-// const chartConfig = {
-//     kidney: { label: "Kidney", color: "hsl(var(--chart-1))" },
-//     liver: { label: "Liver", color: "hsl(var(--chart-2))" },
-//     heart: { label: "Heart", color: "hsl(var(--chart-3))" },
-//     lungs: { label: "Lungs", color: "hsl(var(--chart-4))" },
-// } satisfies ChartConfig;
-
-{
-    /* <ChartContainer config={chartConfig}>
-          <LineChart data={chartData} width={600} height={300} margin={{ left: 20, right: 20 }}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="month" />
-            <YAxis />
-            <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
-            <Legend />
-            <Line type="monotone" dataKey="kidney" stroke="var(--color-kidney)" strokeWidth={2} />
-            <Line type="monotone" dataKey="liver" stroke="var(--color-liver)" strokeWidth={2} />
-            <Line type="monotone" dataKey="heart" stroke="var(--color-heart)" strokeWidth={2} />
-            <Line type="monotone" dataKey="lungs" stroke="var(--color-lungs)" strokeWidth={2} />
-          </LineChart>
-        </ChartContainer> */
-}
-
 export function PatientWaitingByOrganType() {
+    // const totalVisitors = React.useMemo(() => {
+    //     return chartData.reduce((acc, curr) => acc + curr.donors, 0)
+    // }, [])
+
     const totalVisitors = React.useMemo(() => {
-        return chartData.reduce((acc, curr) => acc + curr.visitors, 0);
+        return chartData.reduce((acc, curr) => acc + curr.donors, 0);
     }, []);
 
     return (
@@ -96,10 +84,15 @@ export function PatientWaitingByOrganType() {
                             cursor={false}
                             content={<ChartTooltipContent hideLabel />}
                         />
+                        <ChartLegend
+                            content={<ChartLegendContent nameKey="organ" />}
+                            className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
+                        />
+
                         <Pie
                             data={chartData}
-                            dataKey="visitors"
-                            nameKey="browser"
+                            dataKey="donors"
+                            nameKey="organ"
                             innerRadius={60}
                             strokeWidth={5}
                         >
@@ -129,7 +122,7 @@ export function PatientWaitingByOrganType() {
                                                     y={(viewBox.cy || 0) + 24}
                                                     className="fill-muted-foreground"
                                                 >
-                                                    Visitors
+                                                    Patients
                                                 </tspan>
                                             </text>
                                         );
