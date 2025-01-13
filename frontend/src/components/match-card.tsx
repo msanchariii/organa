@@ -13,22 +13,22 @@ import {
     Dialog,
     DialogContent,
     DialogDescription,
-    DialogFooter,
+    // DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
-import { DialogClose } from "@radix-ui/react-dialog";
 import {
     Table,
     TableBody,
-    TableCaption,
+    // TableCaption,
     TableCell,
-    TableFooter,
+    // TableFooter,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
+import List from "./typography/List";
 
 // * Remove all padding first. Read all the instructions then follow it. Add padding (if needed) at last.
 
@@ -90,19 +90,56 @@ const MatchCard = () => {
                     <DialogContent>
                         <DialogHeader>
                             <DialogTitle>
-                                Patient Name:Kankna MOndal
+                                Patient Name:Kankan Mondal
                             </DialogTitle>
                             <DialogDescription>
-                                Kidney Found for kankna
+                                Kidney match Found for kankan
                             </DialogDescription>
                         </DialogHeader>
+                        <div className="flex w-[50vw] justify-between gap-4">
+                            <List>
+                                <li>
+                                    <strong>Name:</strong>
+                                    Kankan Mondal
+                                </li>
+                                <li>
+                                    <strong>Age:</strong>
+                                    67
+                                </li>
+                                <li>
+                                    <strong>Gender:</strong>
+                                    Female
+                                </li>
+                                <li>
+                                    <strong>Organ needed:</strong>
+                                    Brain
+                                </li>
+                            </List>
+                            <List>
+                                <li>
+                                    <strong>Priority Status:</strong>
+                                    100
+                                </li>
+                                <li>
+                                    <strong>Organ Viability:</strong>5 hours
+                                </li>
+                                <li>
+                                    <strong>Organ Size:</strong>
+                                    25 cm
+                                </li>
+                                <li>
+                                    <strong>Organ Condition:</strong>
+                                    kharap
+                                </li>
+                            </List>
+                        </div>
                         <div>
                             <Table>
-                                <TableCaption>Details</TableCaption>
+                                {/* <TableCaption>Details</TableCaption> */}
                                 <TableHeader>
                                     <TableRow>
-                                        <TableHead className="w-[100px]"></TableHead>
-                                        <TableHead>Doner</TableHead>
+                                        <TableHead className="w-[175px]"></TableHead>
+                                        <TableHead>Donor</TableHead>
                                         <TableHead>Recipient</TableHead>
                                     </TableRow>
                                 </TableHeader>
@@ -113,18 +150,40 @@ const MatchCard = () => {
                                         <TableCell>B+ </TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell>Blood group</TableCell>
+                                        <TableCell>HLA type1</TableCell>
+                                        <TableCell>h1</TableCell>
+                                        <TableCell>h2</TableCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <TableCell>HLA type2</TableCell>
+                                        <TableCell>h1</TableCell>
+                                        <TableCell>h2</TableCell>
+                                    </TableRow>{" "}
+                                    <TableRow>
+                                        <TableCell>HLA type3</TableCell>
+                                        <TableCell>h1</TableCell>
+                                        <TableCell>h2</TableCell>
+                                    </TableRow>{" "}
+                                    <TableRow>
+                                        <TableCell>HLA type4</TableCell>
+                                        <TableCell>h1</TableCell>
+                                        <TableCell>h2</TableCell>
+                                    </TableRow>{" "}
+                                    <TableRow>
+                                        <TableCell>HLA type5</TableCell>
+                                        <TableCell>h1</TableCell>
+                                        <TableCell>h2</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
                         </div>
-                        <DialogFooter className="sm:justify-start">
+                        {/* <DialogFooter className="sm:justify-start">
                             <DialogClose asChild>
                                 <Button type="button" variant="secondary">
                                     Close
                                 </Button>
                             </DialogClose>
-                        </DialogFooter>
+                        </DialogFooter> */}
                     </DialogContent>
                 </Dialog>
                 <Button variant={"default"}>Approve</Button>
