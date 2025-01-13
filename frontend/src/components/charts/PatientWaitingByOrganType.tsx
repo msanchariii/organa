@@ -26,6 +26,8 @@ const chartData = [
     { browser: "other", visitors: 190, fill: "var(--color-other)" },
 ]
 
+
+
 const chartConfig = {
     visitors: {
         label: "Visitors",
@@ -52,13 +54,34 @@ const chartConfig = {
     },
 } satisfies ChartConfig
 
+// const chartConfig = {
+//     kidney: { label: "Kidney", color: "hsl(var(--chart-1))" },
+//     liver: { label: "Liver", color: "hsl(var(--chart-2))" },
+//     heart: { label: "Heart", color: "hsl(var(--chart-3))" },
+//     lungs: { label: "Lungs", color: "hsl(var(--chart-4))" },
+// } satisfies ChartConfig;
+
+{/* <ChartContainer config={chartConfig}>
+          <LineChart data={chartData} width={600} height={300} margin={{ left: 20, right: 20 }}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="month" />
+            <YAxis />
+            <ChartTooltip content={<ChartTooltipContent indicator="line" />} />
+            <Legend />
+            <Line type="monotone" dataKey="kidney" stroke="var(--color-kidney)" strokeWidth={2} />
+            <Line type="monotone" dataKey="liver" stroke="var(--color-liver)" strokeWidth={2} />
+            <Line type="monotone" dataKey="heart" stroke="var(--color-heart)" strokeWidth={2} />
+            <Line type="monotone" dataKey="lungs" stroke="var(--color-lungs)" strokeWidth={2} />
+          </LineChart>
+        </ChartContainer> */}
+
 export function PatientWaitingByOrganType() {
     const totalVisitors = React.useMemo(() => {
         return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
     }, [])
 
     return (
-        <Card className="flex flex-col">
+        <Card className="flex flex-col bg-transparent h-full w-full">
             <CardHeader className="items-center pb-0">
                 <CardTitle>Pie Chart - Donut with Text</CardTitle>
                 <CardDescription>January - June 2024</CardDescription>
@@ -113,14 +136,7 @@ export function PatientWaitingByOrganType() {
                     </PieChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter className="flex-col gap-2 text-sm">
-                <div className="flex items-center gap-2 font-medium leading-none">
-                    Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                </div>
-                <div className="leading-none text-muted-foreground">
-                    Showing total visitors for the last 6 months
-                </div>
-            </CardFooter>
+           
         </Card>
     )
 }

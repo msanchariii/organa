@@ -18,29 +18,44 @@ import {
     ChartTooltip,
     ChartTooltipContent,
 } from "@/components/ui/chart"
+// const chartData = [
+//     { month: "January", desktop: 186, mobile: 80 },
+//     { month: "February", desktop: 305, mobile: 200 },
+//     { month: "March", desktop: 237, mobile: 120 },
+//     { month: "April", desktop: 73, mobile: 190 },
+//     { month: "May", desktop: 209, mobile: 130 },
+//     { month: "June", desktop: 214, mobile: 140 },
+// ]
+
+// const chartConfig = {
+//     desktop: {
+//         label: "Desktop",
+//         color: "hsl(var(--chart-1))",
+//     },
+//     mobile: {
+//         label: "Mobile",
+//         color: "hsl(var(--chart-2))",
+//     },
+// } satisfies ChartConfig
 const chartData = [
-    { month: "January", desktop: 186, mobile: 80 },
-    { month: "February", desktop: 305, mobile: 200 },
-    { month: "March", desktop: 237, mobile: 120 },
-    { month: "April", desktop: 73, mobile: 190 },
-    { month: "May", desktop: 209, mobile: 130 },
-    { month: "June", desktop: 214, mobile: 140 },
-]
+    { month: "January", kidney: 120, liver: 80, heart: 40, lungs: 30 },
+    { month: "February", kidney: 150, liver: 90, heart: 50, lungs: 35 },
+    { month: "March", kidney: 170, liver: 95, heart: 55, lungs: 40 },
+    { month: "April", kidney: 160, liver: 100, heart: 60, lungs: 42 },
+    { month: "May", kidney: 180, liver: 110, heart: 70, lungs: 45 },
+    { month: "June", kidney: 190, liver: 115, heart: 75, lungs: 50 },
+];
 
 const chartConfig = {
-    desktop: {
-        label: "Desktop",
-        color: "hsl(var(--chart-1))",
-    },
-    mobile: {
-        label: "Mobile",
-        color: "hsl(var(--chart-2))",
-    },
-} satisfies ChartConfig
+    kidney: { label: "Kidney", color: "hsl(var(--chart-1))" },
+    liver: { label: "Liver", color: "hsl(var(--chart-2))" },
+    heart: { label: "Heart", color: "hsl(var(--chart-3))" },
+    lungs: { label: "Lungs", color: "hsl(var(--chart-4))" },
+} satisfies ChartConfig;
 
 export function TransplantCompleted() {
     return (
-        <Card>
+        <Card className="bg-transparent h-full w-full">
             <CardHeader>
                 <CardTitle>Line Chart - Multiple</CardTitle>
                 <CardDescription>January - June 2024</CardDescription>
@@ -65,34 +80,38 @@ export function TransplantCompleted() {
                         />
                         <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
                         <Line
-                            dataKey="desktop"
+                            dataKey="kidney"
                             type="monotone"
-                            stroke="var(--color-desktop)"
+                            stroke="var(--color-kidney)"
                             strokeWidth={2}
                             dot={false}
                         />
                         <Line
-                            dataKey="mobile"
+                            dataKey="liver"
                             type="monotone"
-                            stroke="var(--color-mobile)"
+                            stroke="var(--color-liver)"
                             strokeWidth={2}
                             dot={false}
                         />
+                        <Line
+                            dataKey="heart"
+                            type="monotone"
+                            stroke="var(--color-heart)"
+                            strokeWidth={2}
+                            dot={false}
+                        />
+                        <Line
+                            dataKey="lungs"
+                            type="monotone"
+                            stroke="var(--color-lungs)"
+                            strokeWidth={2}
+                            dot={false}
+                        />
+
                     </LineChart>
                 </ChartContainer>
             </CardContent>
-            <CardFooter>
-                <div className="flex w-full items-start gap-2 text-sm">
-                    <div className="grid gap-2">
-                        <div className="flex items-center gap-2 font-medium leading-none">
-                            Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-                        </div>
-                        <div className="flex items-center gap-2 leading-none text-muted-foreground">
-                            Showing total visitors for the last 6 months
-                        </div>
-                    </div>
-                </div>
-            </CardFooter>
+
         </Card>
     )
 }

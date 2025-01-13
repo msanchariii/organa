@@ -18,6 +18,8 @@ const chartData = [
     { organ: "lungs", required: 100, fill: "var(--color-lungs)" },
 ];
 
+
+
 const chartConfig = {
     organs: {
         label: "Organs",
