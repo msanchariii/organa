@@ -13,6 +13,11 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import useAuth from "@/store/AuthStore";
+import { useRouter } from "next/navigation";
+
+
+
 
 const loginSchema = z.object({
     email: z.string().email(),
@@ -20,6 +25,13 @@ const loginSchema = z.object({
 });
 
 const Login = () => {
+
+    const router = useRouter()
+
+    const logIn = useAuth((state) => state.login)
+    const user = useAuth((state)=> state.user)
+    console.log(user);
+    
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
@@ -30,7 +42,15 @@ const Login = () => {
 
     const onSubmit = (values: z.infer<typeof loginSchema>) => {
         console.log(values);
+        // this will be sent by backend (send req using axios)
+        const newuserData = {
+            email: values.email,
+            staffId: "abcd",
+            hospitalName: "albal",
+        }
+        logIn(newuserData)
         form.reset();
+        router.push('/dashboard')
     };
 
     return (

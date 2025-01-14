@@ -1,108 +1,88 @@
-"use client";
+"use client"
 
 import {
-    Label,
-    PolarGrid,
-    PolarRadiusAxis,
+    PolarAngleAxis,
     RadialBar,
     RadialBarChart,
-} from "recharts";
+} from "recharts"
 
 import {
     Card,
     CardContent,
     CardDescription,
+    CardFooter,
     CardHeader,
     CardTitle,
-} from "@/components/ui/card";
-import { ChartConfig, ChartContainer } from "@/components/ui/chart";
+} from "@/components/ui/card"
+import { ChartConfig, ChartContainer } from "@/components/ui/chart"
+
 const chartData = [
-    { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-];
+    { name: "Success Rate", value: 75, fill: "hsl(var(--chart-1))" },
+]
 
 const chartConfig = {
-    visitors: {
-        label: "Visitors",
+    value: {
+        label: "Success Rate",
     },
-    safari: {
-        label: "Safari",
-        color: "hsl(var(--chart-2))",
-    },
-} satisfies ChartConfig;
+} satisfies ChartConfig
 
 export function OperationSuccessRate() {
     return (
-        <Card className="border-primary flex h-full w-full flex-col bg-transparent">
-            <CardHeader className="items-center">
-                <CardTitle>Radial Chart - Text</CardTitle>
-                <CardDescription>Jan 2014 - Jul 2024</CardDescription>
+        <Card className="flex flex-col bg-transparent border-primary">
+            <CardHeader className="items-center pb-0">
+                <CardTitle>Operation Success Rate</CardTitle>
+                <CardDescription>Current Performance</CardDescription>
             </CardHeader>
-            <CardContent className="flex-1">
+            <CardContent className="flex-1 pb-0">
                 <ChartContainer
                     config={chartConfig}
                     className="mx-auto aspect-square max-h-[250px]"
                 >
                     <RadialBarChart
                         data={chartData}
-                        startAngle={0}
-                        endAngle={250}
-                        innerRadius={80}
-                        outerRadius={110}
+                        startAngle={90}
+                        endAngle={-270}
+                        innerRadius="65%"
+                        outerRadius="85%"
+                        barSize={20}
+                        width={250}
+                        height={250}
                     >
-                        <PolarGrid
-                            gridType="circle"
-                            radialLines={false}
-                            stroke="none"
-                            className="first:fill-muted last:fill-background"
-                            polarRadius={[86, 74]}
+                        <PolarAngleAxis
+                            type="number"
+                            domain={[0, 100]}
+                            angleAxisId={0}
+                            tick={false}
                         />
                         <RadialBar
-                            dataKey="visitors"
                             background
-                            cornerRadius={10}
+                            dataKey="value"
+                            cornerRadius={30}
+                            fill="hsl(var(--chart-1))"
                         />
-                        <PolarRadiusAxis
-                            tick={false}
-                            tickLine={false}
-                            axisLine={false}
+                        <text
+                            x="50%"
+                            y="50%"
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                            className="fill-foreground text-3xl font-bold"
                         >
-                            <Label
-                                content={({ viewBox }) => {
-                                    if (
-                                        viewBox &&
-                                        "cx" in viewBox &&
-                                        "cy" in viewBox
-                                    ) {
-                                        return (
-                                            <text
-                                                x={viewBox.cx}
-                                                y={viewBox.cy}
-                                                textAnchor="middle"
-                                                dominantBaseline="middle"
-                                            >
-                                                <tspan
-                                                    x={viewBox.cx}
-                                                    y={viewBox.cy}
-                                                    className="fill-foreground text-4xl font-bold"
-                                                >
-                                                    {chartData[0].visitors.toLocaleString()}
-                                                </tspan>
-                                                <tspan
-                                                    x={viewBox.cx}
-                                                    y={(viewBox.cy || 0) + 24}
-                                                    className="fill-muted-foreground"
-                                                >
-                                                    Visitors
-                                                </tspan>
-                                            </text>
-                                        );
-                                    }
-                                }}
-                            />
-                        </PolarRadiusAxis>
+                            {`${chartData[0].value}%`}
+                        </text>
+                        <text
+                            x="50%"
+                            y="62%"
+                            textAnchor="middle"
+                            dominantBaseline="middle"
+                            className="fill-muted-foreground text-xs"
+                        >
+                            Success 
+                        </text>
                     </RadialBarChart>
                 </ChartContainer>
             </CardContent>
+            
         </Card>
-    );
+    )
 }
+
