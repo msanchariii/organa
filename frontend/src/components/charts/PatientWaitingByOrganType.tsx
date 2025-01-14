@@ -26,12 +26,12 @@ const chartData = [
     { organ: "Liver", donors: 200, fill: "var(--color-liver)" },
     { organ: "Lungs", donors: 150, fill: "var(--color-lungs)" },
     { organ: "Eyes", donors: 250, fill: "var(--color-eyes)" },
-    { organ: "Intestine", donors: 90, fill: "var(--color-intestine)" },
+    // { organ: "Intestine", donors: 90, fill: "var(--color-intestine)" },
 ];
 
 const chartConfig = {
-    donors: {
-        label: "Donors",
+    organ: {
+        label: "Organ",
     },
     kidney: {
         label: "Kidney",
@@ -60,11 +60,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function PatientWaitingByOrganType() {
-    // const totalVisitors = React.useMemo(() => {
-    //     return chartData.reduce((acc, curr) => acc + curr.donors, 0)
-    // }, [])
-
-    const totalVisitors = React.useMemo(() => {
+    const total = React.useMemo(() => {
         return chartData.reduce((acc, curr) => acc + curr.donors, 0);
     }, []);
 
@@ -85,8 +81,9 @@ export function PatientWaitingByOrganType() {
                             content={<ChartTooltipContent hideLabel />}
                         />
                         <ChartLegend
-                            content={<ChartLegendContent nameKey="organ" />}
-                            className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
+                            content={<ChartLegendContent nameKey={"organ"} />}
+                            layout="horizontal"
+                            align="center"
                         />
 
                         <Pie
@@ -115,7 +112,7 @@ export function PatientWaitingByOrganType() {
                                                     y={viewBox.cy}
                                                     className="fill-foreground text-3xl font-bold"
                                                 >
-                                                    {totalVisitors.toLocaleString()}
+                                                    {total.toLocaleString()}
                                                 </tspan>
                                                 <tspan
                                                     x={viewBox.cx}
