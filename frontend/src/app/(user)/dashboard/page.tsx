@@ -4,21 +4,37 @@ import { PatientWaitingByOrganType } from "@/components/charts/PatientWaitingByO
 import { TransplantCompleted } from "@/components/charts/TransplantCompleted";
 import H3 from "@/components/typography/H3";
 import { Heart } from "lucide-react";
+import { Handshake } from "lucide-react";
 
 const DashboardPage = () => {
     return (
         <div className="space-y-4 pb-4">
             <div className="grid grid-cols-5 gap-4">
-                <div className="bg-primary text-primary-foreground col-span-2 rounded-xl border p-4">
-                    <h1 className="font-semibold">
-                        Hello, <br />{" "}
-                        <span className="text-3xl font-bold">
-                            Hospital Staff
-                        </span>
-                    </h1>
-                    <p></p>
+                <div className="bg-primary text-primary-foreground col-span-3 rounded-xl p-4">
+                    <div className="flex h-full gap-8 p-4">
+                        <Handshake size={80} className="" />
+                        <div className="h-full w-full space-y-4">
+                            <div className="">
+                                <h1 className="font-semibold">Hello,</h1>
+                                <h1 className="mb-4 pt-2 text-4xl font-bold">
+                                    Hospital Staff!
+                                </h1>
+                                <p>
+                                    <strong>Hosital Name: </strong>NRS
+                                </p>
+                                <p>
+                                    <strong>Stuff-id: </strong>3000000
+                                </p>
+                            </div>
+                            <p className="max-w-[550px] text-wrap">
+                                Today is Sunday. Three organ matches are found.
+                                Lets have some live. Lorem ipsum dolor sit amet.
+                                Lorem ipsum dolor sit.
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div className="border-primary col-span-2 space-y-8 rounded-xl border p-4 text-center">
+                <div className="border-primary col-span-1 space-y-8 rounded-xl border p-4 text-center">
                     <H3>Statistics</H3>
                     <div className="divide-y px-4">
                         <StatComponent title="Total Patients" value="100" />
