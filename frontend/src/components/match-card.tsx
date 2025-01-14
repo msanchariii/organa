@@ -11,10 +11,8 @@ import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
     Dialog,
-    // DialogClose,
     DialogContent,
     DialogDescription,
-    // DialogFooter,
     DialogHeader,
     DialogTitle,
     DialogTrigger,
@@ -22,27 +20,16 @@ import {
 import {
     Table,
     TableBody,
-    // TableCaption,
     TableCell,
-    // TableFooter,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
 import List from "./typography/List";
 
-// * Remove all padding first. Read all the instructions then follow it. Add padding (if needed) at last.
-
 const MatchCard = () => {
     return (
-        // @kankanmondal22
-        // ! Add time of notification in the card i.e. "1 hours ago"
-
-        <Card className="bg-card/50">
-            {/* 
-                    // * Avatar component should be used inside CardHeader component (use flex, flex-row in CardHeader to align Avatar and CardTitle)
-                    */}
-
+        <Card className="rounded-none border-x-0 border-b-2 border-t-0 bg-transparent shadow-none">
             <CardHeader className="flex flex-row justify-between">
                 <CardTitle className="flex flex-row items-center gap-4">
                     <Avatar className="h-8 w-8 text-sm">
@@ -56,12 +43,7 @@ const MatchCard = () => {
                     ago
                 </CardDescription>
             </CardHeader>
-
-            {/*
-             */}
-            <CardContent>
-                {/*
-                 */}
+            <CardContent className="space-y-1">
                 <p className="text-sm">
                     <strong>Recipient Name: </strong>Kankan Mondal
                 </p>
@@ -74,13 +56,15 @@ const MatchCard = () => {
                 </p>
 
                 <p className="text-sm">
-                    <strong>Organ Conditon:</strong> Good
+                    <strong>Current Location:</strong> Kolkata
                 </p>
             </CardContent>
 
-            <CardFooter className="relative space-x-4">
-                <Button variant={"default"}>Approve</Button>
-                <Button variant={"secondary"}>Dismiss</Button>
+            <CardFooter className="flex justify-between">
+                <div className="flex gap-4">
+                    <Button variant={"default"}>Approve</Button>
+                    <Button variant={"secondary"}>Dismiss</Button>
+                </div>
                 <Dialog>
                     <DialogTrigger asChild>
                         <Button className="" variant={"outline"}>
@@ -93,14 +77,15 @@ const MatchCard = () => {
                                 Patient Name: Kankan Mondal
                             </DialogTitle>
                             <DialogDescription>
-                                Kidney match Found for kankan
+                                <strong className="capitalize">Heart </strong>
+                                match Found for kankan
                             </DialogDescription>
                         </DialogHeader>
-                        <div className="flex w-[50vw] justify-between gap-4 text-sm">
-                            <List>
+                        <div className="flex w-full justify-between gap-4 text-sm">
+                            <List className="basis-1/2">
                                 <li>
-                                    <strong>Name: </strong>
-                                    Kankan Mondal
+                                    <strong>Donor Name: </strong>
+                                    Subha Mistry
                                 </li>
                                 <li>
                                     <strong>Age: </strong>
@@ -115,7 +100,7 @@ const MatchCard = () => {
                                     Brain
                                 </li>
                             </List>
-                            <List>
+                            <List className="basis-1/2">
                                 <li>
                                     <strong>Priority Status: </strong>
                                     100
@@ -158,17 +143,17 @@ const MatchCard = () => {
                                         <TableCell>HLA type2</TableCell>
                                         <TableCell>h1</TableCell>
                                         <TableCell>h2</TableCell>
-                                    </TableRow>{" "}
+                                    </TableRow>
                                     <TableRow>
                                         <TableCell>HLA type3</TableCell>
                                         <TableCell>h1</TableCell>
                                         <TableCell>h2</TableCell>
-                                    </TableRow>{" "}
+                                    </TableRow>
                                     <TableRow>
                                         <TableCell>HLA type4</TableCell>
                                         <TableCell>h1</TableCell>
                                         <TableCell>h2</TableCell>
-                                    </TableRow>{" "}
+                                    </TableRow>
                                     <TableRow>
                                         <TableCell>HLA type5</TableCell>
                                         <TableCell>h1</TableCell>
@@ -177,13 +162,6 @@ const MatchCard = () => {
                                 </TableBody>
                             </Table>
                         </div>
-                        {/* <DialogFooter className="sm:justify-start">
-                            <DialogClose asChild>
-                                <Button type="button" variant="secondary">
-                                    Close
-                                </Button>
-                            </DialogClose>
-                        </DialogFooter> */}
                     </DialogContent>
                 </Dialog>
             </CardFooter>
