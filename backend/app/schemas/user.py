@@ -1,21 +1,30 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional
-from datetime import datetime  # ✅ Import added
+from datetime import datetime
 
+# Base schema shared across different operations
 class UserBase(BaseModel):
     email: EmailStr
-    # role: str
     staff_id: str
-    
+
+# Schema for creating a user
 class UserCreate(UserBase):
     password: str
-    
+    role: str
+
+# Schema for user login
 class UserLogin(BaseModel):
     hospital_id: int
     staff_id: str
     password: str
-    
-class UserOut(UserBase):
+
+# Schema for user output
+class UserOut(BaseModel):
     id: int
+    email: EmailStr
+    staff_id: str
     hospital_id: Optional[int]
-    created_at: datetime  # ✅ Field added
+    created_at: datetime
+
+    class Config:
+        orm_mode = True
