@@ -1,3 +1,36 @@
+# Setup
+
+## Requirements
+
+- Python (`python --version`)   
+- Pip (`pip --version`)
+
+## Create A Virtual Environment
+
+```py
+cd backend
+python -m venv venv
+```
+
+## Activate The Virtual Env
+
+```py
+./venv/Scripts/activate
+```
+
+## Install All the dependencies
+
+```
+pip install -r requirements.txt
+```
+
+## Deactivate The Virtual Env
+
+```
+deactivate
+```
+
+
 ## Authenticaltion routes
 
 POST /api/auth/register
