@@ -1,7 +1,7 @@
+from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from .. import database, models, schemas, utils
-from typing import List
 from ..utils.oauth2 import create_access_token
 
 

@@ -4,19 +4,18 @@ from datetime import datetime  # ✅ Import added
 
 class UserBase(BaseModel):
     email: EmailStr
-    hospital_name: str
-    role: str
-
+    # role: str
+    staff_id: str
+    
 class UserCreate(UserBase):
     password: str
-
+    
+class UserLogin(BaseModel):
+    hospital_id: int
+    staff_id: str
+    password: str
+    
 class UserOut(UserBase):
     id: int
-    created_at: datetime  
-
-    class Config:
-        from_attributes = True
-
-class UserLogin(BaseModel):
-    email: EmailStr
-    password: str
+    hospital_id: Optional[int]
+    created_at: datetime  # ✅ Field added
