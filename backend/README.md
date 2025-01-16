@@ -27,7 +27,7 @@ pip install -r requirements.txt
 ## Run the developmen server
 
 ```
-fastapi dev main.py
+fastapi dev app/main.py
 ```
 
 ## Deactivate The Virtual Env
