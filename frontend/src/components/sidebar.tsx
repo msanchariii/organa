@@ -15,7 +15,7 @@ import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
     const pathname = usePathname();
-    console.log("Pathname", pathname);
+    // console.log("Pathname", pathname);
     return (
         <>
             <div className="w-64"></div>
