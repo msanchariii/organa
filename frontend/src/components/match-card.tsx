@@ -27,7 +27,55 @@ import {
 } from "@/components/ui/table";
 import List from "./typography/List";
 
-const MatchCard = () => {
+type MatchCardProps = {
+
+
+    organ?: {
+        organType?: string;
+        priorityStatus?: number;
+        organViability?: number;
+        organSize?: string;
+        organCondition?: string;
+    }
+    donor?: {
+        name?: string;
+        bloodGroup?: string;
+        hlaA?: string;
+        hlaB?: string;
+        hlaC?: string;
+        hlaD?: string;
+        hlaDRB1?: string;
+        hlaDQB1?: string;
+    }
+    recepient?: {
+        name?: string;
+        age?: number;
+        gender?: string;
+        location?: string;
+        bloodGroup?: string;
+        hlaA?: string;
+        hlaB?: string;
+        hlaC?: string;
+       
+        hlaDRB1?: string;
+        hlaDQB1?: string;
+    }
+    notification?: {
+        time?: string;
+    }
+    compatibility?: {
+        score?: number | string;
+        geminiSummary?: string;
+    }
+
+};
+
+const MatchCard = ({
+    organ,
+    donor,
+    recepient,
+    notification,
+}: MatchCardProps) => {
     return (
         <Card className="rounded-none border-x-0 border-b-2 border-t-0 bg-transparent shadow-none">
             <CardHeader className="flex flex-row justify-between">
@@ -39,24 +87,24 @@ const MatchCard = () => {
                     Patient match found
                 </CardTitle>
                 <CardDescription className="flex items-center justify-center gap-2">
-                    <div className="bg-primary h-2 w-2 rounded"></div> 1 hour
-                    ago
+                    <div className="bg-primary h-2 w-2 rounded"></div> {notification?.time || "2 hours ago"}
+
                 </CardDescription>
             </CardHeader>
             <CardContent className="space-y-1">
                 <p className="text-sm">
-                    <strong>Recipient Name: </strong>Kankan Mondal
+                    <strong>Recipient Name: </strong>{recepient?.name || "Kankan Mondal"}
                 </p>
 
                 <p className="text-sm">
-                    <strong>Organ Type: </strong> Kidney
+                    <strong>Organ Type: </strong> {organ?.organType || "Heart"}
                 </p>
                 <p className="text-sm">
-                    <strong>Viable Time of Organ: </strong> 5 hours
+                    <strong>Viable Time of Organ: </strong> {organ?.organViability || "5 hours"}
                 </p>
 
                 <p className="text-sm">
-                    <strong>Current Location:</strong> Kolkata
+                    <strong>Current Location:</strong> {recepient?.location || "Kolkata"}
                 </p>
             </CardContent>
 
@@ -74,10 +122,10 @@ const MatchCard = () => {
                     <DialogContent>
                         <DialogHeader>
                             <DialogTitle>
-                                Patient Name: Kankan Mondal
+                                Patient Name: {recepient?.name || "Kankan Mondal"}
                             </DialogTitle>
                             <DialogDescription>
-                                <strong className="capitalize">Heart </strong>
+                                <strong className="capitalize">{organ?.organType}</strong>
                                 match Found for kankan
                             </DialogDescription>
                         </DialogHeader>
@@ -85,36 +133,37 @@ const MatchCard = () => {
                             <List className="basis-1/2">
                                 <li>
                                     <strong>Donor Name: </strong>
-                                    Subha Mistry
+                                    {donor?.name || "Kankan Mondal"}
                                 </li>
                                 <li>
                                     <strong>Age: </strong>
-                                    67
+                                    {recepient?.age || "25"}
                                 </li>
                                 <li>
                                     <strong>Gender: </strong>
-                                    Female
+                                    {recepient?.gender || "female"}
                                 </li>
                                 <li>
                                     <strong>Organ needed: </strong>
-                                    Brain
+                                    {organ?.organType || "Heart"}
                                 </li>
                             </List>
                             <List className="basis-1/2">
                                 <li>
                                     <strong>Priority Status: </strong>
-                                    100
+                                    {organ?.priorityStatus || "1"}
                                 </li>
                                 <li>
-                                    <strong>Organ Viability: </strong>5 hours
+                                    <strong>Organ Viability: </strong>
+                                    {organ?.organViability || "5 hours"}
                                 </li>
                                 <li>
                                     <strong>Organ Size: </strong>
-                                    25 cm
+                                    {organ?.organSize || "Large"}
                                 </li>
                                 <li>
                                     <strong>Organ Condition: </strong>
-                                    kharap
+                                    {organ?.organCondition || "Good"}
                                 </li>
                             </List>
                         </div>
@@ -131,33 +180,33 @@ const MatchCard = () => {
                                 <TableBody>
                                     <TableRow>
                                         <TableCell>Blood group</TableCell>
-                                        <TableCell>B+</TableCell>
-                                        <TableCell>B+ </TableCell>
+                                        <TableCell>{donor?.bloodGroup||"A+"}</TableCell>
+                                        <TableCell>{recepient?.bloodGroup||"B+"} </TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell>HLA type1</TableCell>
-                                        <TableCell>h1</TableCell>
-                                        <TableCell>h2</TableCell>
+                                        <TableCell>HLA typeA</TableCell>
+                                        <TableCell>{donor?.hlaA||"h1asd"}</TableCell>
+                                        <TableCell>{recepient?.hlaA||"h1"}</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell>HLA type2</TableCell>
-                                        <TableCell>h1</TableCell>
-                                        <TableCell>h2</TableCell>
+                                        <TableCell>HLA typeB</TableCell>
+                                        <TableCell>{donor?.hlaB||"h1"}</TableCell>
+                                        <TableCell>{recepient?.hlaB||"h2"}</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell>HLA type3</TableCell>
-                                        <TableCell>h1</TableCell>
-                                        <TableCell>h2</TableCell>
+                                        <TableCell>HLA typeC</TableCell>
+                                        <TableCell>{donor?.hlaC||"h1"}</TableCell>
+                                        <TableCell>{recepient?.hlaC||"h2"}</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell>HLA type4</TableCell>
-                                        <TableCell>h1</TableCell>
-                                        <TableCell>h2</TableCell>
+                                        <TableCell>HLA typeDRB1</TableCell>
+                                        <TableCell>{donor?.hlaDRB1||"h1"}</TableCell>
+                                        <TableCell>{recepient?.hlaDRB1||"h2"}</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell>HLA type5</TableCell>
-                                        <TableCell>h1</TableCell>
-                                        <TableCell>h2</TableCell>
+                                        <TableCell>HLA typeDQB1</TableCell>
+                                        <TableCell>{donor?.hlaDQB1||"h1"}</TableCell>
+                                        <TableCell>{donor?.hlaDQB1||"h2"}</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
