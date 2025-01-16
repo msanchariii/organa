@@ -27,6 +27,10 @@ pip install -r requirements.txt
 ## Run the developmen server
 
 ```
+uvicorn app.main:app --reload
+```
+OR
+```
 fastapi dev app/main.py
 ```
 
