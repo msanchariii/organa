@@ -11,10 +11,11 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
     role: str
+    hospital_id: int
 
 # Schema for user login
 class UserLogin(BaseModel):
-    hospital_id: int
+    hospital_id: int = 1
     staff_id: str
     password: str
 

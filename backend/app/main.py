@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
 from .routes import auth, organs, patients, matching, hospital
 # from . import models
@@ -25,6 +25,19 @@ app.add_middleware(
 @app.get("/") 
 async def root():
     return {"message": "Hello World"}
+
+# @app.websocket("/ws/{hospital_id}")
+# async def websocket_endpoint(websocket: WebSocket, hospital_id: int):
+#     await websocket.accept()
+#     active_connections[hospital_id] = websocket 
+#     try:
+#         while True:
+#             data = await websocket.receive_text()
+#             await websocket.send_text(f"Message text was: {data}")
+#     except WebSocketDisconnect:
+#         del active_connections[hospital_id]
+#         print(f"Hospital {hospital_id} disconnected")
+
 
 app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
 app.include_router(patients.router, prefix="/api/patients", tags=["Patients"])
