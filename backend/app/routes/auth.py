@@ -43,3 +43,7 @@ def login(user_credentials: schemas.UserLogin, db: Session = Depends(database.ge
     access_token = create_access_token(data={"user_id": user.id, "role": user.role})
     
     return {"access_token": access_token, "token_type": "bearer"}
+
+@router.get("/logout")
+def logout():
+    return {"message": "Logout successful"}
