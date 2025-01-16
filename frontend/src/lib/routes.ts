@@ -5,5 +5,7 @@ const routes = {
     getHospitals: `${origin}/hospitals/`,
     addPatient: `${origin}/patients/`,
     addOrgan: `${origin}/organs/`,
+    login: `${origin}/login/`,
+    addStaff: `${origin}/register/staff`,
 };
 export default routes;

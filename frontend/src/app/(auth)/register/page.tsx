@@ -1,3 +1,4 @@
+import StaffForm from "@/components/forms/StaffForm";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,7 +30,7 @@ const RegisterPage = () => {
             <div className="flex basis-1/2 flex-col justify-center gap-8">
                 {" "}
                 <h1 className="text-primary mx-auto text-4xl font-extrabold">
-                    Create a new Stuff
+                    Create a new Staff
                 </h1>
                 <Image
                     src="/Nurse.jpg"
@@ -46,7 +47,7 @@ const RegisterPage = () => {
                     <Link href="/register/staff" className="mx-auto">
                         Create New Staff
                     </Link>
-                </Button>
+                </Button>           
             </div>
         </div>
     );

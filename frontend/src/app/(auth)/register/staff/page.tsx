@@ -1,4 +1,5 @@
 import HospitalForm from "@/components/forms/HospitalForm";
+import StaffForm from "@/components/forms/StaffForm";
 import { GalleryVerticalEnd } from "lucide-react";
 import Image from "next/image";
 import React from "react";
@@ -42,7 +43,7 @@ function page() {
                     </div>
                     <div className="flex flex-1 flex-col items-center justify-center">
                         <div className="w-full max-w-md">
-                            {/* <HospitalForm /> */}
+                            <StaffForm />
                         </div>
                     </div>
                 </div>
