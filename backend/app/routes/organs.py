@@ -7,11 +7,11 @@ from ..services.ai_service import AIService
 
 router = APIRouter()
 
-@router.post("/", response_model=schemas.UserOut)
+@router.post("/", response_model=schemas.OrganOut)
 def create_organ(
     organ: schemas.OrganCreate,
     db: Session = Depends(database.get_db),
-    current_user: models.User = Depends(get_current_user)
+    # current_user: models.User = Depends(get_current_user)
 ):
     new_organ = models.Organ(**organ.model_dump())
     db.add(new_organ)

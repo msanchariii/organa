@@ -46,6 +46,6 @@ class Patient(Base):
     current_medications = Column(String, nullable=True)
     treating_in_hospital = Column(String, nullable=True)
     insurance_details = Column(String, nullable=True)
-    hospital_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    # hospital_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     status = Column(String, nullable=False, default="waiting")  # waiting, matched, transplanted
     created_at = Column(DateTime(timezone=True), server_default=func.now())

@@ -31,7 +31,7 @@ class Organ(Base):
 
     # Location Details
     donor_hospital = Column(String, nullable=False)
-    current_location = Column(String, nullable=True)
+    current_location = Column(String, nullable=True) # Current Hospital or In Transit
     transport_arrangements = Column(String, nullable=True)
 
     # Additional Information

@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 from .. import database, models, schemas
-from ..utils.oauth2 import get_current_user
+# from ..utils.oauth2 import get_current_user
 
 router = APIRouter()
 
@@ -10,7 +10,7 @@ router = APIRouter()
 def create_patient(
     patient: schemas.PatientCreate, 
     db: Session = Depends(database.get_db),
-    current_user: models.User = Depends(get_current_user)
+    # current_user: models.User = Depends(get_current_user)
 ):
     new_patient = models.Patient(**patient.dict())
     db.add(new_patient)
@@ -22,7 +22,7 @@ def create_patient(
 def get_patient(
     id: int, 
     db: Session = Depends(database.get_db),
-    current_user: models.User = Depends(get_current_user)
+    # current_user: models.User = Depends(get_current_user)
 ):
     patient = db.query(models.Patient).filter(models.Patient.id == id).first()
     if not patient:
@@ -32,7 +32,7 @@ def get_patient(
 @router.get("/", response_model=List[schemas.PatientOut])
 def get_patients(
     db: Session = Depends(database.get_db),
-    current_user: models.User = Depends(get_current_user)
+    # current_user: models.User = Depends(get_current_user)
 ):
     patients = db.query(models.Patient).all()
     return patients
@@ -42,7 +42,7 @@ def update_patient(
     id: int,
     patient_update: schemas.PatientUpdate,
     db: Session = Depends(database.get_db),
-    current_user: models.User = Depends(get_current_user)
+    # current_user: models.User = Depends(get_current_user)
 ):
     patient_query = db.query(models.Patient).filter(models.Patient.id == id)
     patient = patient_query.first()
