@@ -12,19 +12,10 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-// import { format } from "date-fns";
 
 import { Input } from "@/components/ui/input";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "../ui/textarea";
-import H2 from "../typography/H2";
 import axios from "axios";
+import routes from "@/lib/routes";
 
 const hospitalSchema = z.object({
     name: z.string().nonempty().min(3),
@@ -48,7 +39,7 @@ const HospitalForm = () => {
     const onSubmit = async (values: z.infer<typeof hospitalSchema>) => {
         console.log("Values: ", values);
         try {
-            const response = await axios.post("http://localhost:8000/api/hospitals/", values);
+            const response = await axios.post(routes.addHospital, values);
             console.log("Response: ", response?.data);
 
         } catch (error) {
@@ -58,9 +49,9 @@ const HospitalForm = () => {
         form.reset();
     };
     return (
-        <Form {...form}
+        <Form {...form} 
         >
-            <form onSubmit={form.handleSubmit(onSubmit)}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="p-4 space-y-4 max-w-lg">
                 {/* Hospital name */}
 
                 <FormField
