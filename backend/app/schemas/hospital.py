@@ -2,18 +2,22 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional, List
 from datetime import datetime
 
+
+    # id = Column(Integer, primary_key=True, index=True)
+    # name = Column(String, unique=True, nullable=False)
+    # location = Column(String, nullable=False)
+    # contact_email = Column(String, unique=True, nullable=False)
+    # contact_phone = Column(String, nullable=False)
+    # admin_id = Column(Integer, nullable=True)
+
 class HospitalBase(BaseModel):
     name: str
     location: str
-    zip_code: int
-    email: EmailStr
-    phone_number: str
-    total_beds: Optional[int] = None
-    available_beds: Optional[int] = None
-    departments: Optional[List[str]] = None
+    contact_email: EmailStr
+    contact_phone: str
 
 class HospitalCreate(HospitalBase):
-    admin_id: int  # The user ID of the hospital administrator i.e. who created the hospital
+    pass
 
 class HospitalOut(HospitalBase):
     id: int
@@ -22,12 +26,5 @@ class HospitalOut(HospitalBase):
     class Config:
         from_attributes = True
 
-class HospitalUpdate(BaseModel):
-    name: Optional[str] = None
-    location: Optional[str] = None
-    zip_code: Optional[int] = None
-    email: Optional[EmailStr] = None
-    phone_number: Optional[str] = None
-    total_beds: Optional[int] = None
-    available_beds: Optional[int] = None
-    departments: Optional[List[str]] = None
+class HospitalUpdate(HospitalBase):
+    pass

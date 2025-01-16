@@ -13,7 +13,7 @@ def create_organ(
     db: Session = Depends(database.get_db),
     current_user: models.User = Depends(get_current_user)
 ):
-    new_organ = models.Organ(**organ.dict())
+    new_organ = models.Organ(**organ.model_dump())
     db.add(new_organ)
     db.commit()
     db.refresh(new_organ)

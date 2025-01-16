@@ -9,3 +9,4 @@ class Hospital(Base):
     location = Column(String, nullable=False)
     contact_email = Column(String, unique=True, nullable=False)
     contact_phone = Column(String, nullable=False)
+    # admin_id = Column(Integer, nullable=True)
