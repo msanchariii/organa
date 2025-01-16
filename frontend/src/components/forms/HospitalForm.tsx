@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import routes from "@/lib/routes";
+import { useToast } from "@/hooks/use-toast";
 
 const hospitalSchema = z.object({
     name: z.string().nonempty().min(3),
@@ -25,6 +26,7 @@ const hospitalSchema = z.object({
 });
 
 const HospitalForm = () => {
+    const { toast } = useToast();
 
     const form = useForm<z.infer<typeof hospitalSchema>>({
         resolver: zodResolver(hospitalSchema),
@@ -41,17 +43,28 @@ const HospitalForm = () => {
         try {
             const response = await axios.post(routes.addHospital, values);
             console.log("Response: ", response?.data);
-
+            toast({
+                variant: "success",
+                title: "Added",
+                description: "Friday, February 10, 2023 at 5:57 PM",
+            });
         } catch (error) {
             console.log("Error: ", error);
+            toast({
+                variant: "destructive",
 
+                title: "Oops! Something went wrong",
+                description: "Friday, February 10, 2023 at 5:57 PM",
+            });
         }
         form.reset();
     };
     return (
-        <Form {...form} 
-        >
-            <form onSubmit={form.handleSubmit(onSubmit)} className="p-4 space-y-4 max-w-lg">
+        <Form {...form}>
+            <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className="max-w-lg space-y-4 p-4"
+            >
                 {/* Hospital name */}
 
                 <FormField
@@ -114,11 +127,9 @@ const HospitalForm = () => {
                 />
 
                 <Button type="submit">Submit</Button>
-
             </form>
-
         </Form>
     );
-}
+};
 
 export default HospitalForm;

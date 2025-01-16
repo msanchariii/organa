@@ -27,6 +27,7 @@ import H2 from "../typography/H2";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import routes from "@/lib/routes";
+import { useToast } from "@/hooks/use-toast";
 
 const organSchema = z.object({
     // Organ Information
@@ -76,6 +77,8 @@ const organSchema = z.object({
 });
 
 const OrganForm = () => {
+    const { toast } = useToast();
+
     const [hospitals, setHospitals] = useState([]);
     useEffect(() => {
         const getAllHospitals = async () => {
@@ -148,11 +151,18 @@ const OrganForm = () => {
             if (res.data) {
                 console.log("Response Data", res.data);
                 form.reset();
-                // !Add Toast Message
-                // !Navigate to /organ
+                toast({
+                    variant: "success",
+                    title: "Organ Added",
+                    description: "Friday, February 10, 2023 at 5:57 PM",
+                }); // !Navigate to /organ
             }
         } catch (error) {
-            // !Add Toast Message
+            toast({
+                variant: "destructive",
+                title: "Something went wrong..",
+                description: "Friday, February 10, 2023 at 5:57 PM",
+            });
         }
     };
 
