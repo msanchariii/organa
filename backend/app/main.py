@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .routes import auth, organs, patients, matching
-from . import models
-# from .database import engine
+# from . import models
+from .models import Base
+from .database import engine
 
-# models.Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
