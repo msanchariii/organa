@@ -27,6 +27,10 @@ import {
 } from "@/components/ui/table";
 import List from "./typography/List";
 
+type MatchCardProps = {
+    donorName: string;
+};
+
 const MatchCard = () => {
     return (
         <Card className="rounded-none border-x-0 border-b-2 border-t-0 bg-transparent shadow-none">

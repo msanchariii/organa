@@ -40,6 +40,7 @@ import {
     CommandItem,
     CommandList,
 } from "@/components/ui/command";
+import { useToast } from "@/hooks/use-toast";
 
 const patientSchema = z.object({
     name: z.string().min(2),
@@ -88,6 +89,8 @@ const patientSchema = z.object({
 });
 
 const PatientForm = () => {
+    const { toast } = useToast();
+
     const form = useForm<z.infer<typeof patientSchema>>({
         resolver: zodResolver(patientSchema),
         defaultValues: {
@@ -124,46 +127,60 @@ const PatientForm = () => {
     const priorityStatus = form.watch("priorityStatus");
 
     const onSubmit = async (values: z.infer<typeof patientSchema>) => {
-        // console.log("Values: ", values);
-        const hospitalId = hospital.find(
-            (item) => item.name === values.treatingInHospital,
-        )?.id;
-        const requestBody = {
-            name: values.name,
-            blood_type: values.bloodType,
-            organ_needed: values.organNeeded,
-            priority_status: values.priorityStatus,
-            location: values.location,
-            zip_code: values.zipCode,
-            medical_history: values.medicalHistory,
-            date_of_birth: values.dateOfBirth,
-            gender: values.gender,
-            weight_in_kg: values.weightInKg,
-            height_in_cm: values.heightInCm,
-            email: values.email,
-            phone_number: values.phoneNumber,
-            primary_diagnosis: values.primaryDiagnosis,
-            hla_test: {
-                hlaA: values.hlaTest?.hlaA,
-                hlaB: values.hlaTest?.hlaB,
-                hlaC: values.hlaTest?.hlaC,
-                hlaDRB1: values.hlaTest?.hlaDRB1,
-                hlaDQB1: values.hlaTest?.hlaDQB1,
-            },
-            pra_score: values.praScore,
-            previous_transplant: values.previousTransplant,
-            comorbidities: values.comorbidities,
-            current_medications: values.currentMedications,
-            treating_in_hospital: values.treatingInHospital,
-            insurance_details: values.insuranceDetails,
-            hospital_id: Number(hospitalId),
-        };
-        console.log("Request Body: ", requestBody);
+        try {
+            // console.log("Values: ", values);
+            const hospitalId = hospital.find(
+                (item) => item.name === values.treatingInHospital,
+            )?.id;
+            const requestBody = {
+                name: values.name,
+                blood_type: values.bloodType,
+                organ_needed: values.organNeeded,
+                priority_status: values.priorityStatus,
+                location: values.location,
+                zip_code: values.zipCode,
+                medical_history: values.medicalHistory,
+                date_of_birth: values.dateOfBirth,
+                gender: values.gender,
+                weight_in_kg: values.weightInKg,
+                height_in_cm: values.heightInCm,
+                email: values.email,
+                phone_number: values.phoneNumber,
+                primary_diagnosis: values.primaryDiagnosis,
+                hla_test: {
+                    hlaA: values.hlaTest?.hlaA,
+                    hlaB: values.hlaTest?.hlaB,
+                    hlaC: values.hlaTest?.hlaC,
+                    hlaDRB1: values.hlaTest?.hlaDRB1,
+                    hlaDQB1: values.hlaTest?.hlaDQB1,
+                },
+                pra_score: values.praScore,
+                previous_transplant: values.previousTransplant,
+                comorbidities: values.comorbidities,
+                current_medications: values.currentMedications,
+                treating_in_hospital: values.treatingInHospital,
+                insurance_details: values.insuranceDetails,
+                hospital_id: Number(hospitalId),
+            };
+            console.log("Request Body: ", requestBody);
 
-        const res = await axios.post(routes.addPatient, requestBody);
-        if (res.status === 200 || res.status === 201) {
-            console.log("Response: ", res?.data);
-            form.reset();
+            const res = await axios.post(routes.addPatient, requestBody);
+            if (res.status === 200 || res.status === 201) {
+                console.log("Response: ", res?.data);
+                form.reset();
+                toast({
+                    variant: "success",
+
+                    title: "Added",
+                    description: "Friday, February 10, 2023 at 5:57 PM",
+                });
+            }
+        } catch (error) {
+            toast({
+                variant: "destructive",
+                title: "Something went wrong",
+                description: "Friday, February 10, 2023 at 5:57 PM",
+            });
         }
     };
     const [hospital, setHospital] = useState([
