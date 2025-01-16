@@ -740,15 +740,15 @@ const PatientForm = () => {
                                             className={cn(
                                                 "w-[200px] justify-between",
                                                 !field.value &&
-                                                    "text-muted-foreground",
+                                                "text-muted-foreground",
                                             )}
                                         >
                                             {field.value
                                                 ? hospital.find(
-                                                      (item) =>
-                                                          item.name ===
-                                                          field.value,
-                                                  )?.name
+                                                    (item) =>
+                                                        item.name ===
+                                                        field.value,
+                                                )?.name
                                                 : "Select Hospital"}
                                             <ChevronsUpDown className="opacity-50" />
                                         </Button>
@@ -757,7 +757,7 @@ const PatientForm = () => {
                                 <PopoverContent className="w-[200px] p-0">
                                     <Command>
                                         <CommandInput
-                                            placeholder="Search framework..."
+                                            placeholder="Search Hospital..."
                                             className="h-9"
                                         />
                                         <CommandList>
