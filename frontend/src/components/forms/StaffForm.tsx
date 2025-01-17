@@ -62,6 +62,11 @@ const StaffForm = () => {
             id: "2",
             name: "NRS",
         },
+    
+        {
+            id: "3",
+            name: "Rg Kar",
+        },
     ])
 
     useEffect(() => {
