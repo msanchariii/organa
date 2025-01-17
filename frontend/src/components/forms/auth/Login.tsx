@@ -32,31 +32,31 @@ import {
 import { useEffect, useState } from "react";
 
 const loginSchema = z.object({
-  // email: z.string().email(),
-  // password: z.string().min(6),
-  hospital_id: z.coerce.number().min(3),
+
+  // hospital_id: z.coerce.number().min(3),
+  hospital_name: z.string().min(3),
+  staff_id: z.string().min(3),
   password: z.string().min(6),
-  staff_id: z.string().min(3  ),
 });
 
 const Login = () => {
 
   const router = useRouter()
 
-  const logIn = useAuth((state) => state.login)
-  const user = useAuth((state) => state.user)
-  console.log(user);
+  // const logIn = useAuth((state) => state.login)
+  // const user = useAuth((state) => state.user)
+  // console.log(user);
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      hospital_id: 0,
+      hospital_name: "",
       staff_id: "",
       password: "",
     },
   });
 
-  const [hospitalId, setHospitalId] = useState([
+  const [hospitals, setHospitals] = useState([
     {
       id: "1",
       name: "Cnmc",
@@ -81,7 +81,7 @@ const Login = () => {
         const response = await axios.get(routes.getHospitals);
         console.log(response.data);
 
-        setHospitalId(response.data);
+        setHospitals(response.data);
       } catch (error) {
         console.log("Error: ", error);
       }
@@ -89,33 +89,31 @@ const Login = () => {
     getHospital();
   }, []);
 
-  // useEffect(() => {
-  //   const enteredHospital = hospitalId.find(
-  //     (item) => item.id === form.getValues("hospital_id").toString()
-  //   );
-  //   if (!enteredHospital) {
-  //     console.log("Unknown Hospital ID");
-  //   }
-  // }, [form.watch("hospital_id")]);
-  
+
+
 
 
   const onSubmit = async (values: z.infer<typeof loginSchema>) => {
-    console.log("Values", values);
-    // this will be sent by backend (send req using axios)
-    // const newuserData = {
-    //     email: values.email,
-    //     staffId: "abcd",
-    //     hospitalName: "albal",
-    // }
-
+    // console.log("Values", values);
     try {
-      const newuserData = await axios.post(routes.login, values)
-      logIn(newuserData.data)
+      const hospitalId = hospitals.find(
+        (item) => item.name === values.hospital_name
+      );
+      const reqBody = {
+        hospital_id: hospitalId?.id,
+        staff_id: values.staff_id,
+        password: values.password
+      }
+
+      console.log("ReqBody", reqBody);
+
+
+      // const newuserData = await axios.post(routes.login, values)
+      // logIn(newuserData.data)
       form.reset();
       router.push('/dashboard')
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 
@@ -130,90 +128,12 @@ const Login = () => {
           Access ad free matching. Flexible and secure.
         </p>
 
-
-
-
-        {/* <FormField
-          control={form.control}
-          name="hospital_id"
-          render={({ field }) => (
-            <FormItem className="flex flex-col">
-              <FormLabel>Treating In hospital</FormLabel>
-              <Popover>
-                <PopoverTrigger asChild>
-                  <FormControl>
-                    <Button
-                      variant="outline"
-                      role="combobox"
-                      className={cn(
-                        "w-[200px] justify-between",
-                        !field.value &&
-                        "text-muted-foreground",
-                      )}
-                    >
-                      {field.value
-                        ? hospitalId.find(
-                          (item) =>
-                            item.id ===
-                            field.value,
-                        )?.name
-                        : "Select Hospital"}
-                      <ChevronsUpDown className="opacity-50" />
-                    </Button>
-                  </FormControl>
-                </PopoverTrigger>
-                <PopoverContent className="w-[200px] p-0">
-                  <Command>
-                    <CommandInput
-                      placeholder="Search Hospital..."
-                      className="h-9"
-                    />
-                    <CommandList>
-                      <CommandEmpty>
-                        No Hospital Found.
-                      </CommandEmpty>
-                      <CommandGroup>
-                        {hospitalId.map((item) => (
-                          <CommandItem
-                            value={item.name}
-                            key={item.id}
-                            onSelect={() => {
-                              form.setValue(
-                                "treatingInHospital",
-                                item.name,
-                              );
-                            }}
-                          >
-                            {item.name}
-                            <Check
-                              className={cn(
-                                "ml-auto",
-                                item.name ===
-                                  field.value
-                                  ? "opacity-100"
-                                  : "opacity-0",
-                              )}
-                            />
-                          </CommandItem>
-                        ))}
-                      </CommandGroup>
-                    </CommandList>
-                  </Command>
-                </PopoverContent>
-              </Popover>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        /> */}
-
-
         <FormField
           control={form.control}
-          name="hospital_id"
+          name="hospital_name"
           render={({ field }) => (
             <FormItem className="flex flex-col">
-              <FormLabel>Treating In Hospital</FormLabel>
+              <FormLabel>Hospital</FormLabel>
               <Popover>
                 <PopoverTrigger asChild>
                   <FormControl>
@@ -221,14 +141,12 @@ const Login = () => {
                       variant="outline"
                       role="combobox"
                       className={cn(
-                        "w-[200px] justify-between",
+                        "w-full justify-between",
                         !field.value && "text-muted-foreground"
                       )}
                     >
                       {field.value
-                        ? `${field.value} - ${hospitalId.find((item) => item.id === field.value.toString())
-                          ?.name || "Unknown Hospital"
-                        }`
+                        ? `${field.value}`
                         : "Select Hospital"}
                       <ChevronsUpDown className="opacity-50" />
                     </Button>
@@ -240,12 +158,12 @@ const Login = () => {
                     <CommandList>
                       <CommandEmpty>No Hospital Found.</CommandEmpty>
                       <CommandGroup>
-                        {hospitalId.map((item) => (
+                        {hospitals.map((item) => (
                           <CommandItem
                             value={item.name}
                             key={item.id}
                             onSelect={() => {
-                              form.setValue("hospital_id", Number(item.id));
+                              form.setValue("hospital_name", item.name);
                             }}
                           >
                             {item.id} - {item.name}
@@ -261,28 +179,6 @@ const Login = () => {
           )}
         />
 
-
-
-        <FormField
-          control={form.control}
-          name="hospital_id"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Hospital Id</FormLabel>
-              <FormControl>
-                <Input
-                  placeholder="1234"
-                  type="number"
-                  {...field}
-                />
-              </FormControl>
-              {/* <FormDescription>
-                                We will never share your email.
-                            </FormDescription> */}
-              <FormMessage />
-            </FormItem>
-          )}
-        />
         <FormField
           control={form.control}
           name="staff_id"
@@ -291,14 +187,11 @@ const Login = () => {
               <FormLabel>Staff Id</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="staff1"
-                  type="string"
+                  placeholder="00000000"
+                  type="text"
                   {...field}
                 />
               </FormControl>
-              {/* <FormDescription>
-                                We will never share your email.
-                            </FormDescription> */}
               <FormMessage />
             </FormItem>
           )}
