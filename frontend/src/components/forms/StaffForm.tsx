@@ -29,14 +29,8 @@ import {
     CommandList,
 } from "@/components/ui/command";
 import { cn } from "@/lib/utils";
-import { Check, ChevronsUpDown } from "lucide-react";
+import {  ChevronsUpDown } from "lucide-react";
 
-// {
-//     "email": "user@example.com",
-//     "staff_id": "string",
-//     "password": "string",
-//     "role": "string"
-//   }
 const registerSchema = z.object({
     email: z.string().email(),
     staff_id: z.string().min(3),
@@ -69,14 +63,6 @@ const StaffForm = () => {
         {
             id: "2",
             name: "NRS",
-        },
-        {
-            id: "3",
-            name: "RGKar",
-        },
-        {
-            id: "4",
-            name: "Sskm",
         },
     ])
 
@@ -180,7 +166,7 @@ const StaffForm = () => {
                                         </Button>
                                     </FormControl>
                                 </PopoverTrigger>
-                                <PopoverContent className="w-[200px] p-0">
+                              <PopoverContent className="w-full p-0">
                                     <Command>
                                         <CommandInput placeholder="Search Hospital..." className="h-9" />
                                         <CommandList>
@@ -206,85 +192,6 @@ const StaffForm = () => {
                         </FormItem>
                     )}
                 />
-
-
-                {/* <FormField
-                    control={form.control}
-                    name="hospital_id"
-                    render={({ field }) => (
-                        <FormItem className="flex flex-col">
-                            <FormLabel>Treating In hospital</FormLabel>
-                            <Popover>
-                                <PopoverTrigger asChild>
-                                    <FormControl>
-                                        <Button
-                                            variant="outline"
-                                            role="combobox"
-                                            className={cn(
-                                                "w-[200px] justify-between",
-                                                !field.value &&
-                                                "text-muted-foreground",
-                                            )}
-                                        >
-                                            {field.value
-                                                ? hospital.find(
-                                                    (item) =>
-                                                        item.name ===
-                                                        field.value,
-                                                )?.name
-                                                : "Select Hospital"}
-                                            <ChevronsUpDown className="opacity-50" />
-                                        </Button>
-                                    </FormControl>
-                                </PopoverTrigger>
-                                <PopoverContent className="w-[200px] p-0">
-                                    <Command>
-                                        <CommandInput
-                                            placeholder="Search Hospital..."
-                                            className="h-9"
-                                        />
-                                        <CommandList>
-                                            <CommandEmpty>
-                                                No Hospital Found.
-                                            </CommandEmpty>
-                                            <CommandGroup>
-                                                {hospital_id.map((item) => (
-                                                    <CommandItem
-                                                        value={item.name}
-                                                        key={item.id}
-                                                        onSelect={() => {
-                                                            form.setValue(
-                                                                "hospital_id",
-                                                                item.name,
-                                                            );
-                                                        }}
-                                                    >
-                                                        {item.name}
-                                                        <Check
-                                                            className={cn(
-                                                                "ml-auto",
-                                                                item.name ===
-                                                                    field.value
-                                                                    ? "opacity-100"
-                                                                    : "opacity-0",
-                                                            )}
-                                                        />
-                                                    </CommandItem>
-                                                ))}
-                                            </CommandGroup>
-                                        </CommandList>
-                                    </Command>
-                                </PopoverContent>
-                            </Popover>
-
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                /> */}
-
-
-
-
 
                 <FormField
                     control={form.control}
