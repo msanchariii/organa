@@ -4,8 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 // import { useRouter } from "next/router";
 import { useRouter } from "next/navigation";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,16 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "../ui/input";
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+} from "@/components/ui/command";
+import { cn } from "@/lib/utils";
+import { Check, ChevronsUpDown } from "lucide-react";
 
 // {
 //     "email": "user@example.com",
@@ -31,7 +42,8 @@ const registerSchema = z.object({
     staff_id: z.string().min(3),
     password: z.string().min(6),
     role: z.string().min(3),
-    hospital_id: z.coerce.number().min(3),
+    // hospital_id: z.coerce.number().min(3),
+    hospital_name: z.string().min(3),
 });
 const StaffForm = () => {
 
@@ -44,15 +56,62 @@ const StaffForm = () => {
             staff_id: "",
             password: "",
             role: "",
-            hospital_id: 0,
+            // hospital_id: 0,
+            hospital_name: "",
         },
     });
+
+    const [hospitals, setHospitals] = useState([
+        {
+            id: "1",
+            name: "Cnmc",
+        },
+        {
+            id: "2",
+            name: "NRS",
+        },
+        {
+            id: "3",
+            name: "RGKar",
+        },
+        {
+            id: "4",
+            name: "Sskm",
+        },
+    ])
+
+    useEffect(() => {
+        const getHospital = async () => {
+            try {
+                const response = await axios.get(routes.getHospitals);
+                console.log(response.data);
+
+                setHospitals(response.data);
+            } catch (error) {
+                console.log("Error: ", error);
+            }
+        };
+        getHospital();
+    }, []);
 
     const onSubmit = async (values: z.infer<typeof registerSchema>) => {
 
         try {
-            const response = await axios.post(routes.addStaff, values);
-            console.log("Registration Successful:", response.data);
+            console.log("Values: ", values);
+            const reqBody = {
+                email: values.email,
+                staff_id: values.staff_id,
+                password: values.password,
+                role: values.role,
+                hospital_name: values.hospital_name,
+                hospital_id: hospitals.find(
+                    (item) => item.name === values.hospital_name
+                )?.id,
+            }
+            console.log("ReqBody: ", reqBody);
+
+            // const response = await axios.post(routes.addStaff, values);
+            // console.log("Registration Successful:", response.data);
             form.reset();
             router.push("/dashboard");
         } catch (error) {
@@ -99,24 +158,134 @@ const StaffForm = () => {
 
                 <FormField
                     control={form.control}
-                    name="hospital_id"
+                    name="hospital_name"
                     render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>Hospital Id</FormLabel>
-                            <FormControl>
-                                <Input
-                                    placeholder="1234"
-                                    type="number"
-                                    {...field}
-                                />
-                            </FormControl>
-                            {/* <FormDescription>
-                            We will never share your email.
-                        </FormDescription> */}
+                        <FormItem className="flex flex-col">
+                            <FormLabel>Hospital</FormLabel>
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <FormControl>
+                                        <Button
+                                            variant="outline"
+                                            role="combobox"
+                                            className={cn(
+                                                "w-full justify-between",
+                                                !field.value && "text-muted-foreground"
+                                            )}
+                                        >
+                                            {field.value
+                                                ? `${field.value}`
+                                                : "Select Hospital"}
+                                            <ChevronsUpDown className="opacity-50" />
+                                        </Button>
+                                    </FormControl>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-[200px] p-0">
+                                    <Command>
+                                        <CommandInput placeholder="Search Hospital..." className="h-9" />
+                                        <CommandList>
+                                            <CommandEmpty>No Hospital Found.</CommandEmpty>
+                                            <CommandGroup>
+                                                {hospitals.map((item) => (
+                                                    <CommandItem
+                                                        value={item.name}
+                                                        key={item.id}
+                                                        onSelect={() => {
+                                                            form.setValue("hospital_name", item.name);
+                                                        }}
+                                                    >
+                                                        {item.id} - {item.name}
+                                                    </CommandItem>
+                                                ))}
+                                            </CommandGroup>
+                                        </CommandList>
+                                    </Command>
+                                </PopoverContent>
+                            </Popover>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
+
+
+                {/* <FormField
+                    control={form.control}
+                    name="hospital_id"
+                    render={({ field }) => (
+                        <FormItem className="flex flex-col">
+                            <FormLabel>Treating In hospital</FormLabel>
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <FormControl>
+                                        <Button
+                                            variant="outline"
+                                            role="combobox"
+                                            className={cn(
+                                                "w-[200px] justify-between",
+                                                !field.value &&
+                                                "text-muted-foreground",
+                                            )}
+                                        >
+                                            {field.value
+                                                ? hospital.find(
+                                                    (item) =>
+                                                        item.name ===
+                                                        field.value,
+                                                )?.name
+                                                : "Select Hospital"}
+                                            <ChevronsUpDown className="opacity-50" />
+                                        </Button>
+                                    </FormControl>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-[200px] p-0">
+                                    <Command>
+                                        <CommandInput
+                                            placeholder="Search Hospital..."
+                                            className="h-9"
+                                        />
+                                        <CommandList>
+                                            <CommandEmpty>
+                                                No Hospital Found.
+                                            </CommandEmpty>
+                                            <CommandGroup>
+                                                {hospital_id.map((item) => (
+                                                    <CommandItem
+                                                        value={item.name}
+                                                        key={item.id}
+                                                        onSelect={() => {
+                                                            form.setValue(
+                                                                "hospital_id",
+                                                                item.name,
+                                                            );
+                                                        }}
+                                                    >
+                                                        {item.name}
+                                                        <Check
+                                                            className={cn(
+                                                                "ml-auto",
+                                                                item.name ===
+                                                                    field.value
+                                                                    ? "opacity-100"
+                                                                    : "opacity-0",
+                                                            )}
+                                                        />
+                                                    </CommandItem>
+                                                ))}
+                                            </CommandGroup>
+                                        </CommandList>
+                                    </Command>
+                                </PopoverContent>
+                            </Popover>
+
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                /> */}
+
+
+
+
+
                 <FormField
                     control={form.control}
                     name="staff_id"
@@ -130,7 +299,7 @@ const StaffForm = () => {
                                     {...field}
                                 />
                             </FormControl>
-                            
+
                             <FormMessage />
                         </FormItem>
                     )}
