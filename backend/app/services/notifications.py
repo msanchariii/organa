@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from ..models.notification import Notification
-from ..websocket.notification_ws import notify_hospital
+from ..models.notification import Notification 
+from ..websocket.notifications import notify_hospital
 
 def create_notification(db: Session, hospital_id: int, message: str):
     """Creates a notification record in the database and sends it via WebSocket."""
