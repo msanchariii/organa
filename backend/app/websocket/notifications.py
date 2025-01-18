@@ -1,7 +1,6 @@
 from fastapi import WebSocket, WebSocketDisconnect
 import json
 
-# Store active WebSocket connections per hospital
 active_connections = {}
 
 async def websocket_endpoint(websocket: WebSocket, hospital_id: int):

@@ -7,5 +7,6 @@ const routes = {
     addOrgan: `${origin}/organs/`,
     login: `${origin}/auth/login/`,
     addStaff: `${origin}/register/staff`,
+    getPatients: `${origin}/patients`,
 };
 export default routes;
