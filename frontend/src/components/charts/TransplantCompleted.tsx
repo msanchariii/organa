@@ -57,8 +57,8 @@ export function TransplantCompleted() {
     return (
         <Card className="border-primary h-full w-full bg-transparent">
             <CardHeader>
-                <CardTitle>Line Chart - Multiple</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <CardTitle>Transplant Completed</CardTitle>
+                <CardDescription>January - February 2025</CardDescription>
             </CardHeader>
             <CardContent>
                 <ChartContainer config={chartConfig} className="h-96 w-full">

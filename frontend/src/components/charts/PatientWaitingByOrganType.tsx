@@ -67,8 +67,8 @@ export function PatientWaitingByOrganType() {
     return (
         <Card className="border-primary flex h-full w-full flex-col bg-transparent">
             <CardHeader className="items-center pb-0">
-                <CardTitle>Pie Chart - Donut with Text</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <CardTitle>Patients Waiting for Organ</CardTitle>
+                <CardDescription>January - February 2025</CardDescription>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
                 <ChartContainer

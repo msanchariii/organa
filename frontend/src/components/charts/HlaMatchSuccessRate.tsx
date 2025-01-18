@@ -56,8 +56,8 @@ export function HlaMatchSuccessRate() {
     return (
         <Card className="border-primary flex h-full w-full flex-col bg-transparent">
             <CardHeader className="items-center pb-0">
-                <CardTitle>Radial Chart - Label</CardTitle>
-                <CardDescription>January - June 2024</CardDescription>
+                <CardTitle>HLA Match Success Rate</CardTitle>
+                <CardDescription>January - february 2025</CardDescription>
             </CardHeader>
             <CardContent className="flex-1 pb-0">
                 <ChartContainer

@@ -28,8 +28,7 @@ const DashboardPage = () => {
                             </div>
                             <p className="max-w-[550px] text-wrap">
                                 Today is Sunday. Three organ matches are found.
-                                Lets have some live. Lorem ipsum dolor sit amet.
-                                Lorem ipsum dolor sit.
+                                Lets have some live.
                             </p>
                         </div>
                     </div>
