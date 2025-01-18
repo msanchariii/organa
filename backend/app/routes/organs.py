@@ -17,6 +17,8 @@ def create_organ(
     db.add(new_organ)
     db.commit()
     db.refresh(new_organ)
+    # check if it matches with any patient
+    
     return new_organ
 
 @router.get("/", response_model=List[schemas.OrganOut])
