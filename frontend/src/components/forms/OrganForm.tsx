@@ -29,6 +29,7 @@ import axios from "axios";
 import routes from "@/lib/routes";
 import { useToast } from "@/hooks/use-toast";
 import useAuth from "@/store/AuthStore";
+import checkCompatibility from "@/lib/checkCompatibility";
 
 const organSchema = z.object({
     // Organ Information
@@ -163,16 +164,29 @@ const OrganForm = () => {
             // check matches. If match, send notification to hospital
             const patientRes = await axios.get(routes.getPatients);
             console.log("Patients: ", patientRes.data);
+            const compatibility = checkCompatibility(reqBody, patientRes.data);
+            console.log("Compatibility: ", compatibility);
 
-            // if matches -> send notification to hospital
+            compatibility.sort((a, b) => b.score - a.score);
+            if (compatibility.length === 0) {
+                return;
+            }
 
-            const newNotification = {
-                title: "Organ Match",
-                description: "Organ match found for patient",
-                date: new Date(),
-                patientData: {},
-                recipientData: {},
-            };
+            const match = compatibility[0].score > 70 && compatibility[0];
+
+            if (match) {
+                const newNotification = {
+                    title: "Organ Match",
+                    description: "Organ match found for patient",
+                    date: new Date(),
+                    patientData: {},
+                    recipientData: {},
+                };
+                console.log("Match: ", match);
+                console.log("New Notification: ", newNotification);
+
+                addNotification(newNotification);
+            }
 
             // const matches = await axios.get(routes.getMatches);
         } catch (error) {

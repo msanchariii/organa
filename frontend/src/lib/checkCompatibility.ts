@@ -11,6 +11,7 @@ type Organ = {
 };
 
 type Patient = {
+    id: number | string;
     name: string;
     blood_type: string;
     organ_needed: string;
@@ -25,9 +26,10 @@ type Patient = {
     location: string;
     gender: string;
     age: number;
+    score?: number;
 };
 
-function calculateCompatibilityScore(
+function checkCompatibility(
     organ: Organ,
     patients: Patient[],
 ): { patient: Patient; score: number }[] {
@@ -83,6 +85,11 @@ function calculateCompatibilityScore(
         }
 
         // Return patient with their calculated score
-        return { patient, score: Math.min(score, 100) }; // Cap score at 100
+        return {
+            patient: patient,
+            score: Math.min(score, 100),
+        }; // Cap score at 100
     });
 }
+
+export default checkCompatibility;

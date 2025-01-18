@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[
+    {
+        "name": "Subha Mistry",
+        "blood_type": "B+",
+        "organ_needed": "heart",
+        "priority_status": 5.9,
+        "location": "Barasat",
+        "zip_code": 700005,
+        "medical_history": "All ok",
+        "date_of_birth": "2024-09-18T00:00:00",
+        "gender": "Female",
+        "weight_in_kg": 80.0,
+        "height_in_cm": 206.0,
+        "email": "subha@gmail.com",
+        "phone_number": "9876559999",
+        "primary_diagnosis": "Matha Gondogol",
+        "hla_test": {
+            "hlaA": "a",
+            "hlaB": "b",
+            "hlaC": "c",
+            "hlaDQB1": "q",
+            "hlaDRB1": "r"
+        },
+        "pra_score": 20.0,
+        "previous_transplant": 5,
+        "comorbidities": "obesity",
+        "current_medications": "insulin",
+        "treating_in_hospital": "RG Kar",
+        "insurance_details": "pending",
+        "id": 1,
+        "status": "waiting",
+        "created_at": "2025-01-18T11:39:20.785116+05:30"
+    },
+    {
+        "name": "Sanchari Mandal",
+        "blood_type": "O+",
+        "organ_needed": "heart",
+        "priority_status": 5.4,
+        "location": "Belgharia",
+        "zip_code": 700112,
+        "medical_history": "Nothing",
+        "date_of_birth": "2025-01-01T00:00:00",
+        "gender": "Female",
+        "weight_in_kg": 90.0,
+        "height_in_cm": 177.0,
+        "email": "sanchari@gmail.com",
+        "phone_number": "9898637282",
+        "primary_diagnosis": "Heart blockage",
+        "hla_test": {
+            "hlaA": "a",
+            "hlaB": "b",
+            "hlaC": "c",
+            "hlaDQB1": "q",
+            "hlaDRB1": "r"
+        },
+        "pra_score": 20.0,
+        "previous_transplant": 0,
+        "comorbidities": "hypertention",
+        "current_medications": "paracetamol",
+        "treating_in_hospital": "RG Kar",
+        "insurance_details": "Pending",
+        "id": 2,
+        "status": "waiting",
+        "created_at": "2025-01-18T11:44:11.434527+05:30"
+    }
+]
+```
