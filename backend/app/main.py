@@ -1,6 +1,6 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from .routes import auth, organs, patients, matching, notification, hospital, websocket
+from .routes import auth, organs, patients, matching, notification, hospital, websocket, ws_router, ws
 # from . import models
 from .models import Base
 from .database import engine
@@ -27,8 +27,6 @@ async def root():
     return {"message": "Hello World"}
 
 app.include_router(notification.router, prefix="/api")
-app.include_router(websocket.router, prefix="/ws")
-
 
 
 app.include_router(auth.router, prefix="/api/auth", tags=["Authentication"])
