@@ -1,18 +1,18 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
-type user = {
-    email?: string | "";
-    staffId?: string | "";
-    hospitalName?: string | "";
-    notifications?: [];
-    accessToken?: string | "";
+type User = {
+    email?: string;
+    staffId?: string;
+    hospitalName?: string;
+    notifications?: string[];
+    accessToken?: string;
 };
 
 interface UserState {
-    user: user;
+    user?: User;
     isLoggedIn: boolean;
-    login: (userData: user) => void;
+    login: (userData: User) => void;
     logout: () => void;
     addNotification: (notification: string) => void;
 }
@@ -31,7 +31,7 @@ const useAuth = create<UserState>()(
                 isLoggedIn: false, // Authentication status
 
                 // Action to log in a user
-                login: (userData: user) =>
+                login: (userData: User) =>
                     set({
                         user: userData,
                         isLoggedIn: true,
@@ -45,16 +45,18 @@ const useAuth = create<UserState>()(
                             staffId: "",
                             hospitalName: "",
                             accessToken: "",
+                            notifications: [],
                         },
                         isLoggedIn: false,
                     }),
 
+                // Action to add a notification
                 addNotification: (notification: string) =>
                     set((state) => ({
                         user: {
                             ...state.user,
                             notifications: [
-                                ...state.user.notifications,
+                                ...(state.user?.notifications || []), // Ensure notifications array exists
                                 notification,
                             ],
                         },
