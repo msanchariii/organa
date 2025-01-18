@@ -108,8 +108,10 @@ const Login = () => {
       console.log("ReqBody", reqBody);
 
 
-      // const newuserData = await axios.post(routes.login, values)
-      // logIn(newuserData.data)
+      const response = await axios.post(routes.login, values)
+      // logIn(newuserData)
+      console.log(response.data);
+      
       form.reset();
       router.push('/dashboard')
     } catch (error) {
