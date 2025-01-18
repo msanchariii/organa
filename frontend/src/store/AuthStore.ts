@@ -56,7 +56,7 @@ const useAuth = create<UserState>()(
                         user: {
                             ...state.user,
                             notifications: [
-                                ...(state.user?.notifications || []), // Ensure notifications array exists
+                                ...(state.user?.notifications || []),
                                 notification,
                             ],
                         },
