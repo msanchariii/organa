@@ -28,6 +28,7 @@ const MatcherPage = () => {
                     <div className="grid grid-cols-1 gap-4">
                         {notifications?.map((n, index) => (
                             <MatchCard
+                                // notificationData={n}
                                 key={index}
                                 notification={{
                                     time: formatTimeAgo(n.date), // Use the formatted time
@@ -44,7 +45,7 @@ const MatcherPage = () => {
                                         n.recipientData.organ_condition_rating,
                                 }}
                                 donor={{
-                                    name: n.recipientData.name || "KANKAN",
+                                    // name: n.recipientData.name || "KANKAN",
                                     bloodGroup: n.patientData.blood_type,
                                     hlaA: n.patientData.hla_test?.hlaA,
                                     hlaB: n.patientData.hla_test?.hlaB,

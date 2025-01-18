@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
     Card,
@@ -26,6 +27,7 @@ import {
     TableRow,
 } from "@/components/ui/table";
 import List from "./typography/List";
+import useAuth from "@/store/AuthStore";
 
 type MatchCardProps = {
     organ?: {
@@ -73,9 +75,16 @@ const MatchCard = ({
     recepient,
     notification,
 }: MatchCardProps) => {
+    const removeNotification = useAuth((state) => state.removeNotification);
     const onClick = () => {
         console.log("Clicked");
     };
+
+    // const handleDismiss = () => {
+    //     removeNotification();
+    //     console.log("Dismissed");
+
+    // };
 
     return (
         <Card className="rounded-none border-x-0 border-b-2 border-t-0 bg-transparent shadow-none">
@@ -93,10 +102,10 @@ const MatchCard = ({
                 </CardDescription>
             </CardHeader>
             <CardContent className="space-y-1">
-                <p className="text-sm">
+                {/* <p className="text-sm">
                     <strong>Recipient Name: </strong>
                     {recepient?.name || "Kankan Mondal"}
-                </p>
+                </p> */}
 
                 <p className="text-sm">
                     <strong>Organ Type: </strong> {organ?.organType || "Heart"}
@@ -115,7 +124,7 @@ const MatchCard = ({
             <CardFooter className="flex justify-between">
                 <div className="flex gap-4">
                     <Button variant={"default"}>Approve</Button>
-                    <Button variant={"secondary"}>Dismiss</Button>
+                    <Button>Dismiss</Button>
                 </div>
                 <Dialog>
                     <DialogTrigger asChild>

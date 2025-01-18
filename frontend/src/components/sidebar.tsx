@@ -23,7 +23,12 @@ const Sidebar = () => {
             <div className="w-64"></div>
             <div className="bg-sidebar-background fixed left-0 top-0 flex h-full w-full max-w-64 flex-col justify-between py-4">
                 <div className="w-full">
-                    <H2 className="text-primary px-6">Organa</H2>
+                    <Link
+                        href={"/"}
+                        className="text-primary px-6 pb-4 text-3xl font-bold"
+                    >
+                        Organa
+                    </Link>
                     <nav className="flex flex-col">
                         {sidebarLinks.map(({ icon, text, path }) => (
                             <SidebarLink

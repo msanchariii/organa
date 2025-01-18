@@ -23,7 +23,7 @@ const DashboardPage = () => {
                                     <strong>Hosital Name: </strong>NRS
                                 </p>
                                 <p>
-                                    <strong>Stuff-id: </strong>3000000
+                                    <strong>Staff-id: </strong>0000001
                                 </p>
                             </div>
                             <p className="max-w-[550px] text-wrap">
