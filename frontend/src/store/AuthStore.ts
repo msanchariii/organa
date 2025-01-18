@@ -1,48 +1,70 @@
 import { create } from "zustand";
+import { devtools, persist } from "zustand/middleware";
 
 type user = {
-    email: string | "";
-    staffId: string | "";
-    hospitalName: string | "";
-    notifications: [];
+    email?: string | "";
+    staffId?: string | "";
+    hospitalName?: string | "";
+    notifications?: [];
+    accessToken?: string | "";
 };
 
-const useAuth = create((set) => ({
-    user: {
-        email: "",
-        staffId: "",
-        hospitalName: "",
-        accessToken: "",
-        notification: [],
-    },
-    isLoggedIn: false, // Authentication status
+interface UserState {
+    user: user;
+    isLoggedIn: boolean;
+    login: (userData: user) => void;
+    logout: () => void;
+    addNotification: (notification: string) => void;
+}
 
-    // Action to log in a user
-    login: (userData: user) =>
-        set({
-            user: userData,
-            isLoggedIn: true,
-        }),
+const useAuth = create<UserState>()(
+    devtools(
+        persist(
+            (set) => ({
+                user: {
+                    email: "",
+                    staffId: "",
+                    hospitalName: "",
+                    accessToken: "",
+                    notifications: [],
+                },
+                isLoggedIn: false, // Authentication status
 
-    // Action to log out a user
-    logout: () =>
-        set({
-            user: {
-                email: "",
-                staffId: "",
-                hospitalName: "",
-                accessToken: "",
+                // Action to log in a user
+                login: (userData: user) =>
+                    set({
+                        user: userData,
+                        isLoggedIn: true,
+                    }),
+
+                // Action to log out a user
+                logout: () =>
+                    set({
+                        user: {
+                            email: "",
+                            staffId: "",
+                            hospitalName: "",
+                            accessToken: "",
+                        },
+                        isLoggedIn: false,
+                    }),
+
+                addNotification: (notification: string) =>
+                    set((state) => ({
+                        user: {
+                            ...state.user,
+                            notifications: [
+                                ...state.user.notifications,
+                                notification,
+                            ],
+                        },
+                    })),
+            }),
+            {
+                name: "user-storage",
             },
-            isLoggedIn: false,
-        }),
-
-    addNotification: (notification: any) =>
-        set((state) => ({
-            user: {
-                ...state.user,
-                notifications: [...state.user.notifications, notification],
-            },
-        })),
-}));
+        ),
+    ),
+);
 
 export default useAuth;

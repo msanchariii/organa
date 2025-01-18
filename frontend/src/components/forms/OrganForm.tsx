@@ -42,6 +42,7 @@ const organSchema = z.object({
         "intestine",
         "eye",
     ]),
+
     recoveryDate: z.date(),
     expectedPreservationTime: z.coerce
         .number()
@@ -79,6 +80,17 @@ const organSchema = z.object({
 });
 
 const OrganForm = () => {
+    const [patients, setPatients] = useState([]);
+
+    useEffect(() => {
+        const getAllPatients = async () => {
+            const res = await axios.get(routes.getPatients);
+            if (res.data) {
+                setPatients(res.data);
+            }
+        };
+        getAllPatients();
+    }, []);
     const { toast } = useToast();
     const addNotification = useAuth((state) => state.addNotification);
 
@@ -92,6 +104,8 @@ const OrganForm = () => {
         };
         getAllHospitals();
     }, []);
+    console.log("Patients", patients);
+
     const form = useForm<z.infer<typeof organSchema>>({
         resolver: zodResolver(organSchema),
         defaultValues: {
@@ -105,11 +119,11 @@ const OrganForm = () => {
             organSize: "Medium",
             organConditionRating: "Good",
             hlaTest: {
-                hlaA: "A*01:01",
-                hlaB: "B*08:01",
-                hlaC: "C*07:01",
-                hlaDRB1: "DRB1*03:01",
-                hlaDQB1: "DQB1*02:01",
+                hlaA: "a",
+                hlaB: "b",
+                hlaC: "c",
+                hlaDRB1: "r",
+                hlaDQB1: "q",
             },
             donorHospital: "St. Mary's Hospital",
             currentLocation: "St. Mary's Hospital",
@@ -164,7 +178,7 @@ const OrganForm = () => {
             // check matches. If match, send notification to hospital
             const patientRes = await axios.get(routes.getPatients);
             console.log("Patients: ", patientRes.data);
-            const compatibility = checkCompatibility(reqBody, patientRes.data);
+            const compatibility = checkCompatibility(reqBody, patients);
             console.log("Compatibility: ", compatibility);
 
             compatibility.sort((a, b) => b.score - a.score);
@@ -178,9 +192,9 @@ const OrganForm = () => {
                 const newNotification = {
                     title: "Organ Match",
                     description: "Organ match found for patient",
-                    date: new Date(),
-                    patientData: {},
-                    recipientData: {},
+                    date: new Date(Date.now()).toISOString(),
+                    patientData: match.patient,
+                    recipientData: reqBody,
                 };
                 console.log("Match: ", match);
                 console.log("New Notification: ", newNotification);
@@ -193,8 +207,10 @@ const OrganForm = () => {
             toast({
                 variant: "destructive",
                 title: "Something went wrong..",
-                description: "Friday, February 10, 2023 at 5:57 PM",
+                description:
+                    error?.message || error || "Please try again later",
             });
+            console.log("Error: ", error);
         }
     };
 
