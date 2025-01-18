@@ -11,6 +11,7 @@ const useAuth = create((set) => ({
         email: "",
         staffId: "",
         hospitalName: "",
+        accessToken: "",
     },
     isLoggedIn: false, // Authentication status
 
@@ -28,6 +29,7 @@ const useAuth = create((set) => ({
                 email: "",
                 staffId: "",
                 hospitalName: "",
+                accessToken: "",
             },
             isLoggedIn: false,
         }),
