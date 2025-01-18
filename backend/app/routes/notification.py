@@ -1,10 +1,28 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, WebSocket, WebSocketDisconnect
 from sqlalchemy.orm import Session
 from ..database import get_db
 from ..models.notification import Notification
+from ..config import SECRET_KEY, ALGORITHM
 from ..services.notifications import create_notification, send_realtime_notification
+from jose import jwt, JWTError
+from ..models import User
+
 
 router = APIRouter()
+
+
+
+
+async def get_current_user(token: str, db: Session):
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        user_id: int = payload.get("user_id")
+        if user_id is None:
+            return None
+        user = db.query(User).filter(User.id == user_id).first()
+        return user
+    except JWTError:
+        return None
 
 @router.get("/notifications/{hospital_id}")
 def get_notifications(hospital_id: int, db: Session = Depends(get_db)):

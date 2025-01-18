@@ -1,1 +1,1 @@
-from .notifications import create_notification, send_realtime_notification
+from .notifications import notify_hospital, websocket_endpoint

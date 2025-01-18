@@ -1,12 +1,12 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from .routes import auth, organs, patients, matching, notification, hospital
+from .routes import auth, organs, patients, matching, notification, hospital, websocket
 # from . import models
 from .models import Base
 from .database import engine
 
 # Drop and create all tables
-# Base.metadata.drop_all(bind=engine)
+Base.metadata.drop_all(bind=engine)
 
 Base.metadata.create_all(bind=engine)
 
@@ -27,6 +27,7 @@ async def root():
     return {"message": "Hello World"}
 
 app.include_router(notification.router, prefix="/api")
+app.include_router(websocket.router, prefix="/ws")
 
 
 
@@ -35,3 +36,4 @@ app.include_router(patients.router, prefix="/api/patients", tags=["Patients"])
 app.include_router(matching.router, prefix="/api/matching", tags=["Matching"])
 app.include_router(organs.router, prefix="/api/organs", tags=["Organs"])
 app.include_router(hospital.router, prefix="/api/hospitals", tags=["Hospitals"])
+app.include_router(notification.router, prefix="/api/notifications", tags=["Notifications"])
