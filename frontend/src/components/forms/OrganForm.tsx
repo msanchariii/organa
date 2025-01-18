@@ -28,6 +28,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import routes from "@/lib/routes";
 import { useToast } from "@/hooks/use-toast";
+import useAuth from "@/store/AuthStore";
 
 const organSchema = z.object({
     // Organ Information
@@ -78,6 +79,7 @@ const organSchema = z.object({
 
 const OrganForm = () => {
     const { toast } = useToast();
+    const addNotification = useAuth((state) => state.addNotification);
 
     const [hospitals, setHospitals] = useState([]);
     useEffect(() => {
@@ -155,8 +157,24 @@ const OrganForm = () => {
                     variant: "success",
                     title: "Organ Added",
                     description: "Friday, February 10, 2023 at 5:57 PM",
-                }); // !Navigate to /organ
+                });
             }
+
+            // check matches. If match, send notification to hospital
+            const patientRes = await axios.get(routes.getPatients);
+            console.log("Patients: ", patientRes.data);
+
+            // if matches -> send notification to hospital
+
+            const newNotification = {
+                title: "Organ Match",
+                description: "Organ match found for patient",
+                date: new Date(),
+                patientData: {},
+                recipientData: {},
+            };
+
+            // const matches = await axios.get(routes.getMatches);
         } catch (error) {
             toast({
                 variant: "destructive",

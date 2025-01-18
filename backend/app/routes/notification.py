@@ -27,12 +27,12 @@ async def get_current_user(token: str, db: Session):
     except JWTError:
         return None
 
-@router.get("/notifications/{hospital_id}")
+@router.get("/{hospital_id}")
 def get_notifications(hospital_id: int, db: Session = Depends(get_db)):
     """Fetch all notifications for a hospital."""
     return db.query(Notification).filter(Notification.hospital_id == hospital_id).all()
 
-@router.post("/notifications/")
+@router.post("/")
 async def send_notification(hospital_id: int, message: str, db: Session = Depends(get_db)):
     """Create a notification and send it in real-time."""
     notification = create_notification(db, hospital_id, message)

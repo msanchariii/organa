@@ -4,6 +4,7 @@ type user = {
     email: string | "";
     staffId: string | "";
     hospitalName: string | "";
+    notifications: [];
 };
 
 const useAuth = create((set) => ({
@@ -12,6 +13,7 @@ const useAuth = create((set) => ({
         staffId: "",
         hospitalName: "",
         accessToken: "",
+        notification: [],
     },
     isLoggedIn: false, // Authentication status
 
@@ -33,6 +35,14 @@ const useAuth = create((set) => ({
             },
             isLoggedIn: false,
         }),
+
+    addNotification: (notification: any) =>
+        set((state) => ({
+            user: {
+                ...state.user,
+                notifications: [...state.user.notifications, notification],
+            },
+        })),
 }));
 
 export default useAuth;
