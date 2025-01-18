@@ -125,6 +125,31 @@ const Login = () => {
         }
     };
 
+    const onSubmit = async (values: z.infer<typeof loginSchema>) => {
+        // console.log("Values", values);
+        try {
+            const hospitalId = hospitals.find(
+                (item) => item.name === values.hospital_name,
+            );
+            const reqBody = {
+                hospital_id: hospitalId?.id,
+                staff_id: values.staff_id,
+                password: values.password,
+            };
+
+            console.log("ReqBody", reqBody);
+
+            const response = await axios.post(routes.login, values);
+            // logIn(newuserData)
+            console.log(response.data);
+
+            form.reset();
+            router.push("/dashboard");
+        } catch (error) {
+            // console.log(error);
+        }
+    };
+
     return (
         <Form {...form}>
             <form
