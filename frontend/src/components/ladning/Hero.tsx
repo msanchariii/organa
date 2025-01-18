@@ -13,7 +13,7 @@ const Hero = () => {
                     <Terminal className="h-4 w-4" />
                     <AlertTitle className="font-semibold">Heads up!</AlertTitle>
                     <AlertDescription>
-                        Your blood donation can save a life and help others
+                        A solution that can save a life of many people.
                     </AlertDescription>
                 </Alert>
             </div>
@@ -25,9 +25,7 @@ const Hero = () => {
                 </span>
             </h1>
             <p className="mb-6 max-w-2xl text-center text-sm font-normal sm:text-base lg:text-lg">
-                Donate blood to save lives. Your blood donation can save a life
-                and help others to live a better life and make a better future
-                for their families.
+                We are here to help you to donate your organs and save a life.
             </p>
             <ShinyButton className="my-2 w-48 font-bold shadow-md">
                 Log In <ArrowRight className="h-5 w-5" />

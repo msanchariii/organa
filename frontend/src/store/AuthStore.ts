@@ -1,11 +1,80 @@
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 
+type HlaTest = {
+    hlaA: string;
+    hlaB: string;
+    hlaC: string;
+    hlaDQB1: string;
+    hlaDRB1: string;
+};
+
+type PatientData = {
+    name: string;
+    blood_type: string;
+    organ_needed: string;
+    priority_status: number;
+    location: string;
+    zip_code: number;
+    medical_history: string;
+    date_of_birth: string;
+    gender: string;
+    weight_in_kg: number;
+    height_in_cm: number;
+    email: string;
+    phone_number: string;
+    primary_diagnosis: string;
+    hla_test: HlaTest;
+    pra_score: number;
+    previous_transplant: number;
+    comorbidities: string;
+    current_medications: string;
+    treating_in_hospital: string;
+    insurance_details: string;
+    id: number;
+    status: string;
+    created_at: string;
+};
+
+type RecipientData = {
+    organ_type: string;
+    recovery_date: string;
+    expected_preservation_time: number;
+    donor_age: number;
+    donor_blood_type: string;
+    donor_gender: string;
+    cause_of_death: string;
+    organ_size: string;
+    organ_condition_rating: string;
+    hla_a: string;
+    hla_b: string;
+    hla_c: string;
+    hla_drb1: string;
+    hla_dqb1: string;
+    donor_hospital: string;
+    current_location: string;
+    transport_arrangements: string;
+    medical_history: string;
+    viral_testing_status: string;
+    organ_biopsy_results: string;
+    location: string;
+    status: string;
+    hospital_id: number;
+};
+
+type Notification = {
+    title: string;
+    description: string;
+    date: string;
+    patientData: PatientData;
+    recipientData: RecipientData;
+};
+
 type User = {
     email?: string;
     staffId?: string;
     hospitalName?: string;
-    notifications?: string[];
+    notifications?: Notification[];
     accessToken?: string;
 };
 
@@ -14,7 +83,9 @@ interface UserState {
     isLoggedIn: boolean;
     login: (userData: User) => void;
     logout: () => void;
-    addNotification: (notification: string) => void;
+    addNotification: (notification: Notification) => void;
+    removeNotification: (notification: Notification) => void;
+    notifications?: Notification[];
 }
 
 const useAuth = create<UserState>()(
@@ -51,7 +122,7 @@ const useAuth = create<UserState>()(
                     }),
 
                 // Action to add a notification
-                addNotification: (notification: string) =>
+                addNotification: (notification: Notification) =>
                     set((state) => ({
                         user: {
                             ...state.user,
@@ -59,6 +130,15 @@ const useAuth = create<UserState>()(
                                 ...(state.user?.notifications || []),
                                 notification,
                             ],
+                        },
+                    })),
+                removeNotification: (notification: Notification) =>
+                    set((state) => ({
+                        user: {
+                            ...state.user,
+                            notifications: state.user?.notifications?.filter(
+                                (n) => n !== notification,
+                            ),
                         },
                     })),
             }),

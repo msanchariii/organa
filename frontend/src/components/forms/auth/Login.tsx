@@ -41,16 +41,12 @@ const loginSchema = z.object({
 const Login = () => {
     const router = useRouter();
 
-    // const logIn = useAuth((state) => state.login)
-    // const user = useAuth((state) => state.user)
-    // console.log(user);
-
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
             hospital_name: "",
-            staff_id: "",
-            password: "",
+            staff_id: "1",
+            password: "123456",
         },
     });
 

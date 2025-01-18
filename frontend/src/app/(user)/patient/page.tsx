@@ -1,20 +1,24 @@
+"use client";
 import H2 from "@/components/typography/H2";
 import H4 from "@/components/typography/H4";
 import { Button } from "@/components/ui/button";
 import DataTable from "@/components/data-table";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import routes from "@/lib/routes";
 
 interface Patient {
     id: number;
     name: string;
-    age: number;
-    bloodType: string;
-    organNeeded: string;
+
+    blood_type: string;
+    organ_needed: string;
     priorityStatus: number;
     status: "Waiting" | "Matched" | "Transplanted" | "Deceased";
 }
 
-const patients: Patient[] = [
+const dummyPatients: Patient[] = [
     {
         id: 1,
         name: "Alice Johnson",
@@ -137,13 +141,29 @@ const patients: Patient[] = [
 const headers: (keyof Patient)[] = [
     "id",
     "name",
-    "age",
-    "bloodType",
-    "organNeeded",
+
+    "blood_type",
+    "organ_needed",
     "status",
 ];
 
 const PatientPage = () => {
+    const [patients, setPatients] = useState([]);
+
+    useEffect(() => {
+        const getPatients = async () => {
+            try {
+                const response = await axios.get(routes.getPatients);
+                console.log(response.data);
+
+                setPatients(response.data);
+            } catch (error) {
+                console.log("Error: ", error);
+            }
+        };
+        getPatients();
+    }, []);
+
     return (
         // <div>
         <div className="space-y-4">
@@ -152,16 +172,17 @@ const PatientPage = () => {
                 <Button asChild>
                     <Link href="/patient/add">Add Patient</Link>
                 </Button>
-                {/* <Bell size={36} className="text-primary" /> */}
             </div>
             <div className="flex w-full justify-between gap-4">
                 <div className="shadow-border/50 mb-8 grid flex-grow grid-cols-1 items-center justify-center gap-4 rounded-xl border p-4 shadow-lg">
                     <H4 className="mb-4 mt-2">Waitlist</H4>
-                    <DataTable
-                        headers={headers}
-                        data={patients}
-                        caption="Current Waitlist for Organ Donation"
-                    />
+                    {patients && (
+                        <DataTable
+                            headers={headers}
+                            data={patients}
+                            caption="Current Waitlist for Organ Donation"
+                        />
+                    )}
                 </div>
                 <div className="shadow-border/50 max-h-96 w-72 rounded-xl border p-4 shadow-lg">
                     <h6 className="text-xl font-bold">Filter</h6>

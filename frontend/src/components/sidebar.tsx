@@ -12,9 +12,11 @@ import React from "react";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./ModeToggle";
 import { usePathname } from "next/navigation";
+import useAuth from "@/store/AuthStore";
 
 const Sidebar = () => {
     const pathname = usePathname();
+    const notifications = useAuth((state) => state.notifications);
     // console.log("Pathname", pathname);
     return (
         <>
