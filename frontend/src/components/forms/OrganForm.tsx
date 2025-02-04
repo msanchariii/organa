@@ -30,6 +30,7 @@ import routes from "@/lib/routes";
 import { useToast } from "@/hooks/use-toast";
 import useAuth from "@/store/AuthStore";
 import checkCompatibility from "@/lib/checkCompatibility";
+import { log } from "console";
 
 const organSchema = z.object({
     // Organ Information
@@ -104,7 +105,7 @@ const OrganForm = () => {
         };
         getAllHospitals();
     }, []);
-    console.log("Patients", patients);
+    // console.log("Patients", patients);
 
     const form = useForm<z.infer<typeof organSchema>>({
         resolver: zodResolver(organSchema),
@@ -164,7 +165,8 @@ const OrganForm = () => {
             hospital_id: 1, //TODO: get hospital id from auth
         };
         try {
-            const res = await axios.post(routes.addOrgan, reqBody);
+            const res = await axios.post("/api/organs", reqBody);
+            console.log("Response: ", res?.data);
             if (res.data) {
                 console.log("Response Data", res.data);
                 form.reset();
@@ -174,41 +176,13 @@ const OrganForm = () => {
                     description: "Friday, February 10, 2023 at 5:57 PM",
                 });
             }
-
-            // check matches. If match, send notification to hospital
-            const patientRes = await axios.get(routes.getPatients);
-            console.log("Patients: ", patientRes.data);
-            const compatibility = checkCompatibility(reqBody, patients);
-            console.log("Compatibility: ", compatibility);
-
-            compatibility.sort((a, b) => b.score - a.score);
-            if (compatibility.length === 0) {
-                return;
-            }
-
-            const match = compatibility[0].score > 70 && compatibility[0];
-
-            if (match) {
-                const newNotification = {
-                    title: "Organ Match",
-                    description: "Organ match found for patient",
-                    date: new Date(Date.now()).toISOString(),
-                    patientData: match.patient,
-                    recipientData: reqBody,
-                };
-                console.log("Match: ", match);
-                console.log("New Notification: ", newNotification);
-
-                addNotification(newNotification);
-            }
-
-            // const matches = await axios.get(routes.getMatches);
         } catch (error) {
             toast({
                 variant: "destructive",
                 title: "Something went wrong..",
                 description:
                     error?.message || error || "Please try again later",
+                duration: 2500,
             });
             console.log("Error: ", error);
         }

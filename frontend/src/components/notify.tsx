@@ -1,5 +1,6 @@
 "use client";
 import { useToast } from "@/hooks/use-toast";
+import { set } from "date-fns";
 import React, { useEffect } from "react";
 import io from "socket.io-client";
 
@@ -10,11 +11,15 @@ const Notify = () => {
 
     useEffect(() => {
         const notifyUser = () => {
-            toast({
-                variant: "success",
-                title: "Organ Match Found",
-                description: "A new organ donor match is available!",
-            });
+            setTimeout(() => {
+                toast({
+                    variant: "notification",
+                    title: "Organ Match Found",
+                    description:
+                        "A new organ donor match is available! Please Check.",
+                    duration: 10000,
+                });
+            }, 3000);
         };
 
         socket.on("update_matches", notifyUser);
