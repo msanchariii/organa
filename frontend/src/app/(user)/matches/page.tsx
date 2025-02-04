@@ -7,13 +7,65 @@ import { Separator } from "@/components/ui/separator";
 import useAuth from "@/store/AuthStore";
 import { Bell } from "lucide-react";
 import { formatDistanceToNow, parseISO } from "date-fns";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useToast } from "@/hooks/use-toast";
 
 const MatcherPage = () => {
-    const notifications = useAuth((state) => state.user?.notifications);
+    const [matches, setMatches] = useState([]);
+    const [refreshKey, setRefreshKey] = useState(0);
+    const { toast } = useToast();
 
-    const formatTimeAgo = (isoDate: string) => {
-        return formatDistanceToNow(parseISO(isoDate), { addSuffix: true });
+    const approveMatch = async (id: number) => {
+        try {
+            const res = await axios.patch(`/api/matches/`, {
+                status: "approved",
+                id: id,
+            });
+            toast({
+                title: "Match Approved",
+                variant: "success",
+            });
+            setRefreshKey((prev) => prev + 1);
+        } catch (error) {
+            toast({
+                title: "Something went wrong!",
+                variant: "destructive",
+            });
+        }
     };
+    const dismissMatch = async (id: number) => {
+        try {
+            const res = await axios.patch(`/api/matches/`, {
+                status: "rejected",
+                id: id,
+            });
+            toast({
+                title: "Match Dismissed",
+                variant: "success",
+            });
+            setRefreshKey((prev) => prev + 1);
+        } catch (error) {
+            toast({
+                title: "Something went wrong!",
+                variant: "destructive",
+            });
+        }
+    };
+
+    useEffect(() => {
+        const getNotifications = async () => {
+            const response = await axios("/api/matches");
+            const matchData = response.data.data.sort(
+                (a, b) => b.match_score - a.match_score,
+            );
+            // const data = await response.json();
+            console.log(response.data);
+            setMatches(response.data.data);
+        };
+
+        getNotifications();
+    }, [refreshKey]);
 
     return (
         <div className="space-y-4">
@@ -26,51 +78,17 @@ const MatcherPage = () => {
                     <H3>New Updates</H3>
                     <Separator />
                     <div className="grid grid-cols-1 gap-4">
-                        {notifications?.map((n, index) => (
+                        {matches?.map((match, index) => (
+                            // <div key={index}>Notification: {index}</div>
                             <MatchCard
                                 // notificationData={n}
+
                                 key={index}
-                                notificationIndex={index}
-                                notification={{
-                                    time: formatTimeAgo(n.date), // Use the formatted time
-                                }}
-                                organ={{
-                                    organType: n.recipientData.organ_type,
-                                    organViability:
-                                        n.recipientData
-                                            .expected_preservation_time,
-                                    organSize: n.recipientData.organ_size,
-                                    priorityStatus:
-                                        n.patientData.priority_status,
-                                    organCondition:
-                                        n.recipientData.organ_condition_rating,
-                                }}
-                                donor={{
-                                    // name: n.recipientData.name || "KANKAN",
-                                    bloodGroup: n.patientData.blood_type,
-                                    hlaA: n.patientData.hla_test?.hlaA,
-                                    hlaB: n.patientData.hla_test?.hlaB,
-                                    hlaC: n.patientData.hla_test?.hlaC,
-                                    hlaDRB1: n.patientData.hla_test?.hlaDRB1,
-                                    hlaDQB1: n.patientData.hla_test?.hlaDQB1,
-                                }}
-                                recepient={{
-                                    name: n.patientData.name,
-                                    age: n.recipientData.donor_age,
-                                    gender: n.patientData.gender,
-                                    location: n.patientData.location,
-                                    bloodGroup: n.patientData.blood_type,
-                                    hlaA: n.patientData.hla_test?.hlaA,
-                                    hlaB: n.patientData.hla_test?.hlaB,
-                                    hlaC: n.patientData.hla_test?.hlaC,
-                                    hlaDRB1: n.patientData.hla_test?.hlaDRB1,
-                                    hlaDQB1: n.patientData.hla_test?.hlaDQB1,
-                                }}
-                                compatibility={{
-                                    score: n.patientData.pra_score.toString(),
-                                    geminiSummary:
-                                        n.patientData.priority_status.toString(),
-                                }}
+                                match={match}
+                                organ={match.organs}
+                                patient={match.patients}
+                                onApprove={() => approveMatch(match.id)}
+                                onDismiss={() => dismissMatch(match.id)}
                             />
                         ))}
                     </div>
