@@ -20,8 +20,8 @@ const Sidebar = () => {
     // console.log("Pathname", pathname);
     return (
         <>
-            <div className="w-64"></div>
-            <div className="bg-sidebar-background fixed left-0 top-0 flex h-full w-full max-w-64 flex-col justify-between py-4">
+            <div className="hidden w-64 lg:block"></div>
+            <div className="bg-sidebar-background left-0 top-0 hidden h-full w-full max-w-64 flex-col justify-between py-4 lg:fixed lg:flex">
                 <div className="w-full">
                     <Link
                         href={"/"}

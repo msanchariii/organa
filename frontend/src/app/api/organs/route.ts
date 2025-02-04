@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { patients } from "@prisma/client";
+import { match } from "assert";
 import axios from "axios";
 import { log } from "console";
 import { NextRequest, NextResponse } from "next/server";
@@ -99,7 +100,8 @@ export async function POST(req: NextRequest) {
 
         // If Match found, send notification to hospital and Add to Database (implement logic here)
         patients.forEach(async (patient) => {
-            await prisma.matches.create({
+            // generate ai summary for patient
+            const newMatch = await prisma.matches.create({
                 data: {
                     organ_id: newOrgan.id,
                     patient_id: patient.id,
@@ -107,6 +109,24 @@ export async function POST(req: NextRequest) {
                     status: "pending",
                 },
             });
+            try {
+                const patientSummary = await axios.post(
+                    "http://localhost:4000/ai",
+                    {
+                        patient: patient,
+                        match: newMatch,
+                        organ: newOrgan,
+                    },
+                );
+                await prisma.matches.update({
+                    data: {
+                        ai_summary: patientSummary.data.data,
+                    },
+                    where: {
+                        id: newMatch.id,
+                    },
+                });
+            } catch (error) {}
         });
 
         // Send Notification to Hospital
