@@ -72,25 +72,25 @@ const MatcherPage = () => {
                 <Bell size={36} className="text-primary" />
             </div>
             <div className="flex w-full justify-between gap-4">
-                <div className="shadow-border/50 mb-8 grid flex-grow grid-cols-1 items-center justify-center gap-4 rounded-xl border p-4 shadow-lg">
-                    <H3>New Updates</H3>
-                    <Separator />
-                    <div className="grid grid-cols-1 gap-4">
-                        {matches?.map((match, index) => (
-                            // <div key={index}>Notification: {index}</div>
-                            <MatchCard
-                                // notificationData={n}
+                {/* <div className="shadow-border/50 bg-secondary/30 mb-8 grid flex-grow grid-cols-1 items-center justify-center gap-4 rounded-xl border p-4 shadow-lg"> */}
+                {/* <H3>New Updates</H3> */}
+                {/* <Separator /> */}
+                <div className="grid w-full grid-cols-1 gap-4">
+                    {matches?.map((match, index) => (
+                        // <div key={index}>Notification: {index}</div>
+                        <MatchCard
+                            // notificationData={n}
 
-                                key={index}
-                                match={match}
-                                organ={match.organs}
-                                patient={match.patients}
-                                onApprove={() => approveMatch(match.id)}
-                                onDismiss={() => dismissMatch(match.id)}
-                            />
-                        ))}
-                    </div>
+                            key={index}
+                            match={match}
+                            organ={match.organs}
+                            patient={match.patients}
+                            onApprove={() => approveMatch(match.id)}
+                            onDismiss={() => dismissMatch(match.id)}
+                        />
+                    ))}
                 </div>
+                {/* </div> */}
                 <div className="shadow-border/50 max-h-96 w-72 rounded-xl border shadow-lg"></div>
             </div>
         </div>

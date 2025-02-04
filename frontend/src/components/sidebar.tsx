@@ -4,6 +4,7 @@ import {
     LayoutDashboard,
     ClipboardMinus,
     HeartPulse,
+    Droplet,
     // Settings,
 } from "lucide-react";
 import H2 from "./typography/H2";
@@ -13,6 +14,8 @@ import { Button } from "./ui/button";
 import { ModeToggle } from "./ModeToggle";
 import { usePathname } from "next/navigation";
 import useAuth from "@/store/AuthStore";
+import { text } from "stream/consumers";
+import path from "path";
 
 const Sidebar = () => {
     const pathname = usePathname();
@@ -97,6 +100,11 @@ const sidebarLinks = [
         icon: ClipboardMinus,
         text: "Patient",
         path: "/patient",
+    },
+    {
+        icon: Droplet,
+        text: "Blood Bank",
+        path: "/bloodbank",
     },
     // {
     //     icon: Settings,

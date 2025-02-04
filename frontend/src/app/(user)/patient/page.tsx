@@ -11,11 +11,10 @@ import routes from "@/lib/routes";
 interface Patient {
     id: number;
     name: string;
-
     blood_type: string;
     organ_needed: string;
     priorityStatus: number;
-    status: "Waiting" | "Matched" | "Transplanted" | "Deceased";
+    status: string;
 }
 
 const dummyPatients: Patient[] = [
@@ -141,7 +140,6 @@ const dummyPatients: Patient[] = [
 const headers: (keyof Patient)[] = [
     "id",
     "name",
-
     "blood_type",
     "organ_needed",
     "status",

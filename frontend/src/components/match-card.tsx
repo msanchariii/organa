@@ -85,7 +85,7 @@ const MatchCard = ({
     const timeSinceNotification = timeAgo(match.created_at!);
 
     return (
-        <Card className="rounded-none border-x-0 border-b-2 border-t-0 bg-transparent shadow-none">
+        <Card className="">
             <CardHeader className="flex flex-row justify-between">
                 <CardTitle className="flex flex-row items-center gap-4">
                     <Avatar className="h-8 w-8 text-sm">

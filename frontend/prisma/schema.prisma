@@ -8,15 +8,17 @@ datasource db {
 }
 
 model hospitals {
-  id            Int             @id @default(autoincrement())
-  name          String          @unique @db.VarChar
-  location      String          @db.VarChar
-  contact_email String          @unique @db.VarChar
-  contact_phone String          @db.VarChar
-  notifications notifications[]
-  organs        organs[]
-  patients      patients[]
-  users         users[]
+  id             Int              @id @default(autoincrement())
+  name           String           @unique @db.VarChar
+  location       String           @db.VarChar
+  contact_email  String           @unique @db.VarChar
+  contact_phone  String           @db.VarChar
+  BloodInventory BloodInventory[]
+  BloodRecipient BloodRecipient[]
+  notifications  notifications[]
+  organs         organs[]
+  patients       patients[]
+  users          users[]
 
   @@index([id], map: "ix_hospitals_id")
 }
@@ -26,10 +28,10 @@ model matches {
   organ_id    Int?
   patient_id  Int?
   match_score Float?
-  ai_summary  String?   @db.VarChar
   status      String?   @db.VarChar
   matched_by  Int?
   created_at  DateTime? @default(now()) @db.Timestamptz(6)
+  ai_summary  String?   @db.VarChar
   users       users?    @relation(fields: [matched_by], references: [id], onDelete: NoAction, onUpdate: NoAction)
   organs      organs?   @relation(fields: [organ_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   patients    patients? @relation(fields: [patient_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
@@ -123,4 +125,29 @@ model users {
 
   @@index([hospital_id], map: "ix_users_hospital_id")
   @@index([id], map: "ix_users_id")
+}
+
+model BloodInventory {
+  id             Int       @id @default(autoincrement())
+  bloodType      String
+  unitsAvailable Int
+  donorHospital  String
+  lastUpdated    DateTime  @default(now())
+  hospitalId     Int
+  hospital       hospitals @relation(fields: [hospitalId], references: [id])
+}
+
+model BloodRecipient {
+  id               Int       @id @default(autoincrement())
+  name             String
+  bloodType        String
+  unitsNeeded      Int
+  priorityStatus   String
+  location         String
+  hospitalId       Int
+  phone            String?
+  email            String?
+  medicalCondition String?
+  status           String    @default("Pending")
+  hospital         hospitals @relation(fields: [hospitalId], references: [id])
 }
