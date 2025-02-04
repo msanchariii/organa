@@ -41,11 +41,12 @@ const HospitalForm = () => {
     const onSubmit = async (values: z.infer<typeof hospitalSchema>) => {
         console.log("Values: ", values);
         try {
-            const response = await axios.post(routes.addHospital, values);
+            // const response = await axios.post(routes.addHospital, values);
+            const response = await axios.post("/api/hospitals", values);
             console.log("Response: ", response?.data);
             toast({
                 variant: "success",
-                title: "Added",
+                title: "Hospital Added",
                 description: "Friday, February 10, 2023 at 5:57 PM",
             });
         } catch (error) {

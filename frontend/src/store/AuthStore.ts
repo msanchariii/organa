@@ -84,7 +84,7 @@ interface UserState {
     login: (userData: User) => void;
     logout: () => void;
     addNotification: (notification: Notification) => void;
-    removeNotification: (notification: Notification) => void;
+    removeNotification: (index: number) => void;
     notifications?: Notification[];
 }
 
@@ -132,15 +132,17 @@ const useAuth = create<UserState>()(
                             ],
                         },
                     })),
-                removeNotification: (notification: Notification) =>
-                    set((state) => ({
-                        user: {
-                            ...state.user,
-                            notifications: state.user?.notifications?.filter(
-                                (n) => n !== notification,
-                            ),
-                        },
-                    })),
+                removeNotification: (index: number) =>
+                    set((state) => {
+                        const notifications = state.user?.notifications || [];
+                        notifications.splice(index, 1);
+                        return {
+                            user: {
+                                ...state.user,
+                                notifications,
+                            },
+                        };
+                    }),
             }),
             {
                 name: "user-storage",

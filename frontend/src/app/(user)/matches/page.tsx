@@ -30,6 +30,7 @@ const MatcherPage = () => {
                             <MatchCard
                                 // notificationData={n}
                                 key={index}
+                                notificationIndex={index}
                                 notification={{
                                     time: formatTimeAgo(n.date), // Use the formatted time
                                 }}

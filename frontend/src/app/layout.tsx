@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Provider from "@/components/Provider";
 import { Toaster } from "@/components/ui/toaster";
+import Notify from "@/components/notify";
 
 const inter = Inter({
     variable: "--font-inter",
@@ -24,6 +25,7 @@ export default function RootLayout({
             <body className={`${inter.className}`}>
                 <Provider>{children}</Provider>
                 <Toaster />
+                <Notify />
             </body>
         </html>
     );

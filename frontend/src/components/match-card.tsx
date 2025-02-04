@@ -67,6 +67,7 @@ type MatchCardProps = {
         score?: number | string;
         geminiSummary?: string;
     };
+    notificationIndex?: number;
 };
 
 const MatchCard = ({
@@ -74,6 +75,7 @@ const MatchCard = ({
     donor,
     recepient,
     notification,
+    notificationIndex,
 }: MatchCardProps) => {
     const removeNotification = useAuth((state) => state.removeNotification);
     const onClick = () => {
@@ -124,7 +126,13 @@ const MatchCard = ({
             <CardFooter className="flex justify-between">
                 <div className="flex gap-4">
                     <Button variant={"default"}>Approve</Button>
-                    <Button>Dismiss</Button>
+                    <Button
+                        onClick={() => {
+                            removeNotification(notificationIndex || 0);
+                        }}
+                    >
+                        Dismiss
+                    </Button>
                 </div>
                 <Dialog>
                     <DialogTrigger asChild>
