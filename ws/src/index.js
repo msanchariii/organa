@@ -2,6 +2,8 @@ import express, { json } from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from "cors";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
 
 const app = express();
 app.use(cors());
@@ -37,4 +39,20 @@ app.post("/send-notification", (req, res) => {
 
 server.listen(4000, () => {
     console.log("Server running on port 4000");
+
 });
+
+
+// AI
+
+const GEMINI_API_KEY = "AIzaSyDNmJDzrdHX0pAoXT6p0Zc507yPFlbQjwQ";
+const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+app.post("/ai", async (req, res) => {
+    const prompt = req.body.prompt;
+    const result = await model.generateContent(prompt);
+    return res.json({ result });
+    
+});
+
