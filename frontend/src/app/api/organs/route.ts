@@ -1,8 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { patients } from "@prisma/client";
-import { match } from "assert";
 import axios from "axios";
-import { log } from "console";
 import { NextRequest, NextResponse } from "next/server";
 
 type PatientType = patients & { score: number };
@@ -42,6 +40,7 @@ export async function POST(req: NextRequest) {
         let patients = await prisma.patients.findMany({
             where: {
                 organ_needed: newOrgan.organ_type,
+                status: "waiting",
             },
         });
 

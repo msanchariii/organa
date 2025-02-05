@@ -7,20 +7,15 @@ import {
     Droplet,
     // Settings,
 } from "lucide-react";
-import H2 from "./typography/H2";
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
 import { ModeToggle } from "./ModeToggle";
 import { usePathname } from "next/navigation";
 import useAuth from "@/store/AuthStore";
-import { text } from "stream/consumers";
-import path from "path";
 
 const Sidebar = () => {
     const pathname = usePathname();
-    const notifications = useAuth((state) => state.notifications);
-    // console.log("Pathname", pathname);
     return (
         <>
             <div className="hidden w-64 lg:block"></div>
@@ -28,7 +23,7 @@ const Sidebar = () => {
                 <div className="w-full">
                     <Link
                         href={"/"}
-                        className="text-primary px-6 pb-4 text-3xl font-bold"
+                        className="text-primary px-6 pb-6 text-3xl font-bold"
                     >
                         Organa
                     </Link>
