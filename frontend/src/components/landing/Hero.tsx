@@ -21,7 +21,7 @@ export default function OrganDonationHero() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-red-50 to-red-100 relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-white via-red-50 to-red-100 relative overflow-hidden">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-10 sm:top-20 left-5 sm:left-10 w-16 sm:w-24 md:w-32 h-16 sm:h-24 md:h-32 bg-red-100 rounded-full opacity-20 animate-pulse"></div>
@@ -60,11 +60,11 @@ export default function OrganDonationHero() {
               </div>
               
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-tight">
-                <span className="bg-gradient-to-r from-red-600 via-red-700 to-red-900 bg-clip-text text-transparent animate-pulse">
+                <span className="bg-linear-to-r from-red-600 via-red-700 to-red-900 bg-clip-text text-transparent animate-pulse">
                   Give the
                 </span>
                 <br />
-                <span className="bg-gradient-to-r from-red-800 via-red-600 to-red-900 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-red-800 via-red-600 to-red-900 bg-clip-text text-transparent">
                   Gift of Life
                 </span>
               </h1>
@@ -79,7 +79,7 @@ export default function OrganDonationHero() {
             </p>
 
             {/* Animated Stats */}
-            <div className={`bg-white/80 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-red-100 shadow-xl transform transition-all duration-1000 delay-500 max-w-sm mx-auto lg:mx-0 ${
+            <div className={`bg-white/80 backdrop-blur-xs rounded-2xl p-4 sm:p-6 border border-red-100 shadow-xl transform transition-all duration-1000 delay-500 max-w-sm mx-auto lg:mx-0 ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'
             }`}>
               <div className="text-center">
@@ -96,15 +96,15 @@ export default function OrganDonationHero() {
             <div className={`flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start transform transition-all duration-1000 delay-700 ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-5 opacity-0'
             }`}>
-              <button className="group relative bg-gradient-to-r from-red-600 to-red-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg shadow-2xl hover:shadow-red-500/40 transform hover:-translate-y-2 hover:scale-110 transition-all duration-300 overflow-hidden">
+              <button className="group relative bg-linear-to-r from-red-600 to-red-700 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-bold text-base sm:text-lg shadow-2xl hover:shadow-red-500/40 transform hover:-translate-y-2 hover:scale-110 transition-all duration-300 overflow-hidden">
                 {/* Shimmer Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                 
                 {/* Background Pulse */}
-                <div className="absolute inset-0 bg-gradient-to-r from-red-700 to-red-800 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-red-700 to-red-800 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                 
                 {/* Glow Ring */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-red-400 to-red-600 rounded-full blur opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+                <div className="absolute -inset-1 bg-linear-to-r from-red-400 to-red-600 rounded-full blur-sm opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
                 
                 <span className="relative flex items-center justify-center gap-2">
                   <Heart className="group-hover:scale-125 group-hover:animate-pulse transition-transform duration-300" size={18} fill="currentColor" />
@@ -121,10 +121,10 @@ export default function OrganDonationHero() {
                 <div className="absolute inset-0 bg-red-600 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-bottom rounded-full"></div>
                 
                 {/* Pulse Border */}
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-red-400 to-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"></div>
+                <div className="absolute -inset-0.5 bg-linear-to-r from-red-400 to-red-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xs"></div>
                 
                 {/* Shimmer Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-100/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-red-100/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                 
                 <span className="relative flex items-center justify-center gap-2 z-10">
                   <Users className="group-hover:scale-125 group-hover:rotate-12 transition-all duration-300" size={18} />
@@ -191,7 +191,7 @@ export default function OrganDonationHero() {
                   {[...Array(8)].map((_, i) => (
                     <div 
                       key={i}
-                      className="absolute w-8 sm:w-12 md:w-16 h-0.5 bg-gradient-to-r from-red-400 to-transparent animate-pulse"
+                      className="absolute w-8 sm:w-12 md:w-16 h-0.5 bg-linear-to-r from-red-400 to-transparent animate-pulse"
                       style={{
                         transform: `rotate(${i * 45}deg)`,
                         transformOrigin: '0 0',

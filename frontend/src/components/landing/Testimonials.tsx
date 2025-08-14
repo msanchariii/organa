@@ -88,7 +88,7 @@ const Testimonials: React.FC = () => {
             style={{ backgroundColor: "#8B0000" }}
         >
             <div className="text-center text-white mb-10 sm:mb-12 pt-8">
-                <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-200 via-white to-yellow-300 bg-clip-text text-transparent drop-shadow-2xl">
+                <h1 className="text-4xl sm:text-5xl font-bold mb-4 bg-linear-to-r from-yellow-200 via-white to-yellow-300 bg-clip-text text-transparent drop-shadow-2xl">
                     Voices of Hope
                 </h1>
                 <p className="text-base sm:text-lg text-white/90 font-medium italic drop-shadow-lg">

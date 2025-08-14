@@ -72,7 +72,7 @@ const MatcherPage = () => {
                 <Bell size={36} className="text-primary" />
             </div>
             <div className="flex w-full justify-between gap-4">
-                {/* <div className="shadow-border/50 bg-secondary/30 mb-8 grid flex-grow grid-cols-1 items-center justify-center gap-4 rounded-xl border p-4 shadow-lg"> */}
+                {/* <div className="shadow-border/50 bg-secondary/30 mb-8 grid grow grid-cols-1 items-center justify-center gap-4 rounded-xl border p-4 shadow-lg"> */}
                 {/* <H3>New Updates</H3> */}
                 {/* <Separator /> */}
                 <div className="grid w-full grid-cols-1 gap-4">
