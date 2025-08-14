@@ -172,7 +172,7 @@ const PatientPage = () => {
                 </Button>
             </div>
             <div className="flex w-full justify-between gap-4">
-                <div className="shadow-border/50 mb-8 grid flex-grow grid-cols-1 items-center justify-center gap-4 rounded-xl border p-4 shadow-lg">
+                <div className="shadow-border/50 mb-8 grid grow grid-cols-1 items-center justify-center gap-4 rounded-xl border p-4 shadow-lg">
                     <H4 className="mb-4 mt-2">Waitlist</H4>
                     {patients && (
                         <DataTable

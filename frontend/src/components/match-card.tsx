@@ -131,7 +131,7 @@ const MatchCard = ({
                 </div>
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button className="" variant={"outline"}>
+                        <Button className="" variant={"outline-solid"}>
                             View Details
                         </Button>
                     </DialogTrigger>

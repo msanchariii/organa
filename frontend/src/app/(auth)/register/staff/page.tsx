@@ -10,7 +10,7 @@ function page() {
             <div className="grid min-h-svh lg:grid-cols-2">
                 <div className="relative hidden h-full w-full p-8 lg:flex">
                     {/* <h1 className="text-xl font-bold">Organ Matching Staff</h1> */}
-                    <div className="outline-muted flex flex-grow flex-col items-center justify-center gap-4 rounded-xl p-2 shadow-xl outline">
+                    <div className="outline-muted flex grow flex-col items-center justify-center gap-4 rounded-xl p-2 shadow-xl outline-solid">
                         <h3 className="text-foreground text-3xl font-bold">
                             Create New Staff
                         </h3>

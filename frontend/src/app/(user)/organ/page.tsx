@@ -15,10 +15,10 @@ const OrganPage = () => {
                 {/* <Bell size={36} className="text-primary" /> */}
             </div>
             <div className="flex gap-4">
-                <div className="basis-1/2 rounded-lg border p-4 shadow-sm">
+                <div className="basis-1/2 rounded-lg border p-4 shadow-xs">
                     <AvailableMatchedTransplantedChart />
                 </div>
-                <div className="basis-1/2 rounded-lg border p-4 shadow-sm">
+                <div className="basis-1/2 rounded-lg border p-4 shadow-xs">
                     <OrganDistribution />
                 </div>
             </div>

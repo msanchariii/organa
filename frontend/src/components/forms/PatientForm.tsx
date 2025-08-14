@@ -252,7 +252,7 @@ const PatientForm = () => {
                                     <PopoverTrigger asChild>
                                         <FormControl>
                                             <Button
-                                                variant={"outline"}
+                                                variant={"outline-solid"}
                                                 className={`pl-3 font-normal ${!field.value && "text-muted-foreground"}`}
                                             >
                                                 {field.value ? (

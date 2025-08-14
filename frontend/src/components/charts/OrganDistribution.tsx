@@ -57,7 +57,7 @@ export function OrganDistribution() {
                 {/* <ChartLegend content={<ChartLegendContent />} /> */}
                 <ChartLegend
                     content={<ChartLegendContent nameKey="organ" />}
-                    className="-translate-y-2 flex-wrap gap-2 [&>*]:basis-1/4 [&>*]:justify-center"
+                    className="-translate-y-2 flex-wrap gap-2 *:basis-1/4 *:justify-center"
                 />
 
                 <Pie data={chartData} dataKey="required">
