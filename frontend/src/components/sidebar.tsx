@@ -5,6 +5,8 @@ import {
     ClipboardMinus,
     HeartPulse,
     Droplet,
+    Users, // Add this
+    MessageCircle, // Add this
     // Settings,
 } from "lucide-react";
 import Link from "next/link";
@@ -100,6 +102,16 @@ const sidebarLinks = [
         icon: Droplet,
         text: "Blood Bank",
         path: "/bloodbank",
+    },
+    {
+        icon: Users,
+        text: "About Us",
+        path: "/about",
+    },
+    {
+        icon: MessageCircle,
+        text: "Contact",
+        path: "/contact",
     },
     // {
     //     icon: Settings,
